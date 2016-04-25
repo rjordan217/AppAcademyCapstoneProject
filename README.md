@@ -6,29 +6,33 @@
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+Petsy is a web application inspired by (you guessed it!) Etsy that will be built using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
-- [ ] New account creation, login, and guest/demo login
+- [ ] New account creation, login, and guest/demo login for regular users and stores
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
-- [ ] The minimally necessary features for an Evernote-inspired site: note creation and saving, note editing, and notes organized into notebooks
+- [ ] The minimally necessary features for an Etsy-inspired site: product posting and editing, shopping cart management, item favoriting and tagging, and possibly construction of wishlists and store/user profiles.
 - [ ] Hosting on Heroku
 - [ ] CSS styling that is satisfactorily visually appealing
 - [ ] A production README, replacing this README (**NB**: check out the [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md) -- you'll write this later)
 
 ## Product Goals and Priorities
 
-FresherNote will allow users to do the following:
+Petsy will allow users to do the following:
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
-- [ ] Create an account (MVP)
+- [ ] Create user account (MVP)
+- [ ] Apply for a marketplace account
 - [ ] Log in / Log out, including as a Guest/Demo User (MVP)
-- [ ] Create, read, edit, and delete notes (MVP)
-- [ ] Organize notes within Notebooks (MVP)
-- [ ] Tag notes with multiple tags (expected feature, but not MVP)
-- [ ] Apply complex styling to notes while editing (expected feature, but not MVP)
+- [ ] Create/edit/delete item postings (if sales account) (MVP)
+- [ ] Add/remove items to shopping cart (MVP)
+- [ ] Add/remove items from wishlist (expected feature, but not MVP)
+- [ ] Tag items with multiple tags (expected feature, but not MVP)
+- [ ] Favorite items (expected feature, but not MVP)
+- [ ] Review transactions/orders (expected feature, but not MVP)
+- [ ] Run promotions on sales accounts, with discounts and coupons (expected feature, but not MVP)
 
 ## Design Docs
 * [View Wireframes][views]

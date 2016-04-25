@@ -12,6 +12,12 @@
 - `POST /users`
 - `PATCH /users`
 
+### Stores
+
+- `GET /stores/new`
+- `POST /stores`
+- `PATCH /stores`
+
 ### Session
 
 - `GET /session/new`
@@ -20,34 +26,26 @@
 
 ## JSON API
 
-### Notes
+### Items
 
-- `GET /api/notes`
-  - Notes index/search
+- `GET /api/items`
+  - Items index/search
   - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `GET /api/stores/:store_id/items/new`
+- `POST /api/stores/:store_id/items`
+- `PATCH /api/stores/:store_id/items/:item_id`
+- `DELETE /api/stores/:store_id/items/:item_id`
+  - Item modification URLs will pre-validate presence of a valid store session_token and redirect if not present
+- `GET /api/stores/:store_id/items/:item_id`
 
-### Notebooks
-
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+<!-- TODO: Add more JSON APIs??? -->
 
 ### Tags
 
-- A note's tags will be included in the note show template
+- A note's tags will be included in the item show template
 - `GET /api/tags`
   - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
+- `POST /api/items/:item_id/tags`: add tag to item by name
+  - if item doesn't already exist, it will be created
+- `DELETE /api/items/:item_id/tags/:tag_name`: remove tag from item by
   name
