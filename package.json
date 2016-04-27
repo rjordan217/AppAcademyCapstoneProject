@@ -1,0 +1,40 @@
+{
+  "name": "Petsy",
+  "version": "1.0.0",
+  "description": "[Heroku link][heroku] **NB:** This should be a link to your production site",
+  "main": "config.webpack.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjordan217/AppAcademyCapstoneProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjordan217/AppAcademyCapstoneProject/issues"
+  },
+  "homepage": "https://github.com/rjordan217/AppAcademyCapstoneProject#readme",
+  "dependencies": {
+    "babel-core": "^6.7.7",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "flux": "^2.1.1",
+    "path": "^0.12.7",
+    "react": "^15.0.1",
+    "react-addons-linked-state-mixin": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-router": "^2.3.0",
+    "webpack": "^1.13.0"
+  },
+  "engines": {
+    "node": "5.7.1",
+    "npm": "3.6.0"
+  }
+}

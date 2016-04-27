@@ -6,14 +6,14 @@
 ## New Session
 ![new-session]
 
-## NotesIndex / NoteIndexItem / NoteForm
+## ItemsIndex / ItemIndexElement / ItemForm
 ![notes]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## StoresIndex / StoreIndexItem
+![stores]
 
-## NotebookForm
-![notebook-form]
+## StoreForm
+![store-form]
 
 [new-user]: ./wireframes/new_user.png
 [new-session]: ./wireframes/new_session.png
