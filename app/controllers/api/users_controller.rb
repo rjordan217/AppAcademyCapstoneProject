@@ -28,6 +28,7 @@ class Api::UsersController < ApplicationController
     render :new
   end
 
+  private
   def verify_login
     if @user.nil?
       @user = User.new

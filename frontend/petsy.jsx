@@ -1,10 +1,10 @@
-var LoginForm = require('./components/login_form'),
+var Main = require('./components/main'),
     React = require('react'),
     ReactDOM = require('react-dom');
 
 document.addEventListener("DOMContentLoaded", function() {
   ReactDOM.render(
-    <LoginForm />,
+    <Main />,
     document.getElementById('content')
   );
 });

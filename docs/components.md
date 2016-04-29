@@ -3,7 +3,7 @@
 * `App`
   * `SearchIndex`
   * `StoresIndex`
-    * `StoreIndexItem`
+    * `StoreIndexElement`
   * `StoreForm`
   * `ItemsIndex`
     * `ItemForm`

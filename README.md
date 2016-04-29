@@ -1,6 +1,6 @@
 # Petsy
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
+[Heroku link][heroku]
 
 [heroku]: https://petsyapp.herokuapp.com/
 

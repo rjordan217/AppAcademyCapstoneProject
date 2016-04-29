@@ -1,5 +1,5 @@
 var UserStore = require('../stores/user_store'),
-    UserApiUtil = require('../util/api_utils').UserApiUtil;
+    UserApiUtil = require('../util/user_api_util');
 
 var CurrentUserStateMixin = {
   getInitialState: function() {

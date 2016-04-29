@@ -1,4 +1,4 @@
-var UserApiUtil = require('../util/api_utils').UserApiUtil,
+var UserApiUtil = require('../util/user_api_util'),
     UserStore = require('../stores/user_store');
 
 var UserActions = {

@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Petsy</title>
+  <title>Petsy - Your Specialty Pet Marketplace!</title>
+  <%= favicon_link_tag %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <script type="text/javascript">
+    window.cloudinary_options = {
+      cloud_name: '<%= ENV['CLOUD_NAME'] %>',
+      upload_preset: '<%= ENV['UPLOAD_PRESET'] %>'
+    }
+  </script>
+  <script src="http://widget.cloudinary.com/global/all.js" charset="utf-8"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
