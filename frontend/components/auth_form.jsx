@@ -11,6 +11,7 @@ var React = require('react'),
 
 var AuthForm = React.createClass({
   mixins: [LinkedStateMixin, CurrentUserStateMixin],
+
   getInitialState: function() {
     return {
       inProgress: false,
@@ -19,36 +20,37 @@ var AuthForm = React.createClass({
       password: ""
     };
   },
-  componentDidMount: function() {
-    this.disablerToken = UserStore.addListener(this._reenable);
-  },
+
   _passUpImageUrl: function(url) {
     if (this.state.imageUrl !== url) {
       this.setState({imageUrl: url});
     }
   },
+
   _reenable: function() {
     this.setState({inProgress: false});
     if (this.state.currentUser.username) {
       this.props.closeModalFun();
     }
   },
+
   _submitLogin: function(e) {
     e.preventDefault();
     // TODO: Put in submission logic
     UserActions.login({
       username: this.state.username,
       password: this.state.password
-    });
+    }, this._reenable);
     this.setState({inProgress: true});
   },
+
   _submitRegistration: function(e) {
     e.preventDefault();
     UserActions.create({
       username: this.state.username,
       password: this.state.password,
       profile_pic_url: this.state.imageUrl
-    });
+    }, this._reenable);
     this.setState(
       {
         inProgress: true,
@@ -57,16 +59,26 @@ var AuthForm = React.createClass({
       }
     );
   },
-  componentWillUnmount: function() {
-    this.disablerToken.remove();
-  },
+
   render: function() {
+    var ErrorGroup;
+    if (this.state.authErrors.length !== 0) {
+      ErrorGroup = (
+        <ul className="auth-errors">
+          {this.state.authErrors.map(function(err, idx) {
+            return (<li key={idx}>{err}</li>);
+          })}
+        </ul>
+      );
+    }
     if (this.props.authType === "logout") {
+      var logoutHeader = <h3>
+        Logging out...
+      </h3>;
       return (
-        <div>
-          <h3>
-            <img className="loader-gif" src="/assets/loader.gif" />Logging out...
-          </h3>
+        <div className="logging-out">
+          <img className="loader-gif" src="/assets/loader.gif" />
+          {ErrorGroup || logoutHeader}
         </div>
       );
     }
@@ -105,6 +117,8 @@ var AuthForm = React.createClass({
         <button onClick={this.props.closeModalFun} className="close-modal">x</button>
 
         {authHeader}
+
+        {ErrorGroup}
 
         <label>Username:
           <input id="username" type="text" valueLink={this.linkState("username")} />

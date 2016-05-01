@@ -7,16 +7,16 @@ var UserActions = {
     UserApiUtil.fetchCurrentUser();
   },
 
-  login: function(userParams) {
-    UserApiUtil.login(userParams);
+  login: function(userParams, callback) {
+    UserApiUtil.login(userParams, callback);
   },
 
-  logout: function() {
-    UserApiUtil.logout();
+  logout: function(callback) {
+    UserApiUtil.logout(callback);
   },
 
-  create: function(userParams) {
-    UserApiUtil.create(userParams);
+  create: function(userParams, callback) {
+    UserApiUtil.create(userParams, callback);
   },
 
   destroy: function() {

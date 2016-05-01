@@ -55,6 +55,18 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 10px;
+  font-size: 24px;
+  color: #bbb;
+}
+
+input[type="search"]:focus {
+  color: #000;
+}
+
 /* Clearfix */
 
 .group:after {
@@ -118,11 +130,23 @@ body {
   width: 100%;
   position: fixed;
   top: 0;
+  box-shadow: 3px 3px 2px #252;
   background: #eee;
   background: -webkit-linear-gradient(#ddd, #eee);
   background: -o-linear-gradient(#ddd, #eee);
   background: -moz-linear-gradient(#ddd, #eee);
   background: linear-gradient(#ddd, #eee);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.search-bar * {
+  margin: 10px;
+  height: 40px;
 }
 
 .nav-logo {
@@ -140,6 +164,7 @@ body {
 }
 
 .nav-auth {
+  margin-right: 30px;
   display: flex;
 }
 
@@ -149,7 +174,7 @@ body {
   padding: 15px;
   border-radius: 10px;
   font-size: 18px;
-  display: inline-block;
+  cursor: pointer;
 }
 
 .nav-auth *:hover {
@@ -164,8 +189,41 @@ body {
   margin-top: 80px;
 }
 
+.cart-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.cart-icon * {
+  border: 0;
+}
+
+.cart-icon:hover * {
+  background: rgb(255, 255, 100);
+  background: -webkit-linear-gradient(left top, rgb(200,200,75),rgb(255,255,100));
+  background: -o-linear-gradient(bottom right, rgb(200,200,75),rgb(255,255,100));
+  background: -moz-linear-gradient(bottom right, rgb(200,200,75),rgb(255,255,100));
+  background: linear-gradient(bottom right, rgb(200,200,75),rgb(255,255,100));
+  border: 1px solid black;
+}
+
+#cart-size {
+  margin: 0;
+  padding: 0 5px;
+  background-color: #2b2;
+  border-radius: 10px;
+}
+
 .prof-thumbnail {
   padding: 25px;
+}
+
+.prof-thumbnail:hover {
+  border: 1px solid rgb(255,255,100);
 }
 
 
@@ -225,40 +283,20 @@ button {
   height:20px;
 }
 
-/* Stores Index and Store Elements
- *
- *
- *
- */
-
-.stores-index {
+.logging-out {
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 5px;
-}
-
-.store-index-el {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 200px;
-  background-color: #000;
-  color: #fff;
-  margin: 5px;
 }
 
-.store-index-el img {
-  max-width: 180px;
-  max-height: 130px;
-  width: auto;
-  height: auto;
+.logging-out * {
+  margin: 30px;
 }
 
-/*
- *
- *
- *
- */
+.primary-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}

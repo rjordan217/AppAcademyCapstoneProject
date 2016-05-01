@@ -1,0 +1,41 @@
+.items-index {
+  max-width: 70%;
+  flex-grow: 4;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.item-index-el {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+  color: #fff;
+  margin: 10px;
+  * {
+    margin: 5px;
+  }
+  img {
+    background-color: #eee;
+    max-width: 180px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+  }
+  cursor: pointer;
+}
+
+ .item-detail {
+   img {
+     max-width: 400px;
+     max-height: 500px;
+   }
+   p {
+     text-indent: 2.0em;
+   }
+ }

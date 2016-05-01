@@ -8,7 +8,6 @@ var Main = React.createClass({
   render: function() {
     return (
       <div className="main">
-        <NavBar />
         <div className="index-container">
           <ImageCarousel />
           <StoresIndex />

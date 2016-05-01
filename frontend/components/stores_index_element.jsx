@@ -1,8 +1,11 @@
-var React = require('react');
+var React = require('react'),
+    HashHistory = require('react-router').hashHistory;
 
 var StoresIndexElement = React.createClass({
   _clickedForDetail: function (e) {
     // TODO: Have this return item details
+    e.preventDefault();
+    HashHistory.push('stores/' + this.props.store.id);
   },
   render: function() {
     var store = this.props.store;

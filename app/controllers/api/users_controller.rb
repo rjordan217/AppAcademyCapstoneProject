@@ -1,20 +1,11 @@
 class Api::UsersController < ApplicationController
   before_action :verify_login, only: [:show, :destroy]
 
-  def new
-    @user = User.new
-    render :new
-  end
-
   def create
     @user = User.new(user_params)
-    if @user.save
-      login!(@user)
-      render :show
-    else
-      flash.now[:errors] = @user.errors.full_messages
-      render :new, status: 401
-    end
+    login!(@user) if @user.save
+    @errors += @user.errors.full_messages
+    render :show
   end
 
   def show
@@ -23,16 +14,18 @@ class Api::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy!
-    logout!
-    render :new
+    unless @user.nil? || (@user != current_user)
+      @user.destroy
+      errs = @user.errors.full_messages
+      logout!
+    end
+    @user = User.new
+    @errors += errs
+    render :show
   end
 
   private
   def verify_login
-    if @user.nil?
-      @user = User.new
-      render :show
-    end
+    @user = current_user || User.new
   end
 end

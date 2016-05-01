@@ -7,50 +7,53 @@ var UserApiUtil = { //TODO: Fix error handling
       url: '/api/user',
       success: function(user) {
         ServerActions.setCurrentUser(user);
-      },
-      error: function(data, status, e) {
-        console.log(status);
       }
     });
   },
 
-  login: function(userParams) {
+  login: function(userParams, callback) {
     $.ajax({
       method: 'POST',
       url: '/api/session',
       data: {user: userParams},
       success: function(user) {
-        ServerActions.setCurrentUser(user);
-      },
-      error: function(data, status, e) {
-        console.log(status);
+        if (user.errors.length === 0) {
+          ServerActions.setCurrentUser(user);
+        } else {
+          ServerActions.setUserErrors(user.errors);
+        }
+        setTimeout(callback,1000);
       }
     });
   },
 
-  logout: function() {
+  logout: function(callback) {
     $.ajax({
       method: 'DELETE',
       url: '/api/session',
       success: function(user) {
-        ServerActions.setCurrentUser(user);
-      },
-      error: function(data, status, e) {
-        console.log(status);
+        if (user.errors.length === 0) {
+          ServerActions.setCurrentUser(user);
+        } else {
+          ServerActions.setUserErrors(user.errors);
+        }
+        setTimeout(callback,1000);
       }
     });
   },
 
-  create: function(userParams) {
+  create: function(userParams, callback) {
     $.ajax({
       method: 'POST',
       url: '/api/user',
       data: {user: userParams},
       success: function(user) {
-        ServerActions.setCurrentUser(user);
-      },
-      error: function(data, status, e) {
-        console.log(status);
+        if (user.errors.length === 0) {
+          ServerActions.setCurrentUser(user);
+        } else {
+          ServerActions.setUserErrors(user.errors);
+        }
+        setTimeout(callback,1000);
       }
     });
   },
@@ -60,10 +63,11 @@ var UserApiUtil = { //TODO: Fix error handling
       method: 'DELETE',
       url: '/api/user',
       success: function(user) {
-        ServerActions.setCurrentUser(user);
-      },
-      error: function(data, status, e) {
-        console.log(status);
+        if(user.errors.length === 0) {
+          ServerActions.setCurrentUser(user);
+        } else {
+          ServerActions.setUserErrors(user.errors);
+        }
       }
     });
   }

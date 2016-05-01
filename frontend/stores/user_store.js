@@ -33,11 +33,12 @@ UserStore.__onDispatch = function(payload) {
       break;
     case UserConstants.RECEIVE_CURRENT_USER:
       setCurrentUser(payload.user);
-      console.log("Change emitted");
+      resetErrors([]);
       UserStore.__emitChange();
       break;
     case UserConstants.LOGOUT_CURRENT_USER:
       logoutUser();
+      resetErrors([]);
       UserStore.__emitChange();
       break;
   }

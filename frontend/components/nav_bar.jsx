@@ -2,6 +2,8 @@ var React = require('react'),
     UserActions = require('../actions/user_actions'),
     Logo = require('./logo'),
     AuthForm = require('./auth_form'),
+    SearchBar = require('./search_bar'),
+    ShoppingCartIcon = require('./shopping_cart_icon'),
     Modal = require('react-modal'),
     modalStyle = require('../styles/auth_modal'),
     CurrentUserStateMixin = require('../mixins/current_user_state');
@@ -29,7 +31,7 @@ var NavBar = React.createClass({
     });
   },
   _logout: function() {
-    UserActions.logout();
+    UserActions.logout(this.closeModal);
     this.setState({
       modalOpen: true,
       authType: "logout"
@@ -57,6 +59,7 @@ var NavBar = React.createClass({
       }
       authButtons = (
         <div className="nav-auth">
+          <ShoppingCartIcon />
           <div className="prof-thumbnail" style={profPicPOJO}></div>
           <div onClick={this._logout}>Logout</div>
         </div>
@@ -66,6 +69,7 @@ var NavBar = React.createClass({
     return (
       <header className="nav-bar">
         <Logo />
+        <SearchBar />
         <Modal
           isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal}
