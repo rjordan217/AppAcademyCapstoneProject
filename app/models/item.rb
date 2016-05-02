@@ -5,4 +5,6 @@ class Item < ActiveRecord::Base
 
   belongs_to :store
   validates_presence_of :store
+
+  has_many :favorites, as: :favoritable, dependent: :destroy
 end

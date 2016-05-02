@@ -1,7 +1,10 @@
 var React = require('react'),
+    FavoriteButton = require('./favorite_button'),
+    CurrentUserStateMixin = require('../mixins/current_user_state'),
     HashHistory = require('react-router').hashHistory;
 
 var ItemIndexElement = React.createClass({
+  mixins: [CurrentUserStateMixin],
 
   _getDetail: function() {
     HashHistory.push(this.props.location.pathname + '/items/' + this.props.item.id);
@@ -14,6 +17,8 @@ var ItemIndexElement = React.createClass({
         <img src={item.product_pic_url} />
         <h3>{item.title}</h3>
         <p>{item.price.toFixed(2)}</p>
+        {this.state.currentUser.username ? <FavoriteButton favorites={item.favorites}
+          favoritable={{type: "Item", id: item.id}} /> : null}
       </div>
     );
   }

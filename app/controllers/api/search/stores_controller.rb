@@ -4,7 +4,7 @@ class Api::Search::StoresController < ApplicationController
       "store_name ILIKE ? OR description ILIKE ?",
       parsed_search_params,
       parsed_search_params
-    )
+    ).includes(:favorites)
     render '/api/stores/index'
   end
 end

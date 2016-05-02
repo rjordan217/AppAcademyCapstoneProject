@@ -17,7 +17,7 @@ var ServerActions = {
       user: user
     });
   },
-  
+
   setSellers: function(sellers) {
     Dispatcher.dispatch({
       actionType: SellerConstants.RECEIVE_STORES,
@@ -53,6 +53,30 @@ var ServerActions = {
       actionType: ItemConstants.ITEM_DESTROYED,
       item: item
     });
+  },
+  addFavorite: function(favorite) {
+    var payload = {favorite: favorite};
+    switch (favorite.favoritable_type) {
+      case "Store":
+        payload['actionType'] = SellerConstants.FAVORITE_ADDED;
+        break;
+      case "Item":
+        payload['actionType'] = ItemConstants.FAVORITE_ADDED;
+        break;
+    }
+    Dispatcher.dispatch(payload);
+  },
+  removeFavorite: function(favorite) {
+    var payload = {favorite: favorite};
+    switch (favorite.favoritable_type) {
+      case "Store":
+        payload['actionType'] = SellerConstants.FAVORITE_REMOVED;
+        break;
+      case "Item":
+        payload['actionType'] = ItemConstants.FAVORITE_REMOVED;
+        break;
+    }
+    Dispatcher.dispatch(payload);
   }
 };
 

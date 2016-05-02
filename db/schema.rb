@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429210821) do
+ActiveRecord::Schema.define(version: 20160502170531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favoritable_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "favorites", ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
+  add_index "favorites", ["user_id", "favoritable_id"], name: "index_favorites_on_user_id_and_favoritable_id", unique: true, using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.integer  "store_id",                                                 null: false
@@ -49,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160429210821) do
     t.string   "profile_pic_url", default: "/assets/default_profile_pic.jpg"
   end
 
+  add_foreign_key "favorites", "users"
   add_foreign_key "items", "stores"
   add_foreign_key "stores", "users"
 end

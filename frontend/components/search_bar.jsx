@@ -1,24 +1,18 @@
 var React = require('react'),
     LinkedStateMixin = require('react-addons-linked-state-mixin'),
+    InProgressMixin = require('../mixins/in_progress'),
     HashHistory = require('react-router').hashHistory;
 
 var SearchBar = React.createClass({
 
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, InProgressMixin],
 
   getInitialState: function() {
-    return {
-      searchParams: "Search Petsy...",
-      inProgress: false
-    };
-  },
-
-  _reenable: function() {
-    this.setState({inProgress: false});
+    return { searchParams: "Search Petsy..." };
   },
 
   _submitSearch: function() {
-    this.setState({inProgress: true});
+    this._disable();
     setTimeout(this._reenable, 1000);
     HashHistory.push("/search/" + encodeURIComponent(this.state.searchParams));
   },

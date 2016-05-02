@@ -300,3 +300,16 @@ button {
   justify-content: space-between;
   flex-wrap: nowrap;
 }
+
+.favorite-button {
+  text-align: center;
+}
+
+.favorite-button button {
+  padding: 5px;
+  -webkit-text-stroke: 1px black;
+}
+
+.favorite-button button:hover {
+  -webkit-text-stroke: 1px #2b2;
+}

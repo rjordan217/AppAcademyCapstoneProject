@@ -14,6 +14,7 @@ class Api::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    errs = []
     unless @user.nil? || (@user != current_user)
       @user.destroy
       errs = @user.errors.full_messages

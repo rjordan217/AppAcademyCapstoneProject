@@ -1,5 +1,4 @@
-var ItemApiUtil = require('../util/item_api_util'),
-    ItemStore = require('../stores/item_store');
+var ItemApiUtil = require('../util/item_api_util');
 
 var ItemActions = {
 

@@ -4,7 +4,7 @@ class Api::Search::ItemsController < ApplicationController
       "title ILIKE ? OR description ILIKE ?",
       parsed_search_params,
       parsed_search_params
-    )
+    ).includes(:favorites)
     render '/api/items/index'
   end
 end

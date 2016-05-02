@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resource :user, only: [:create, :show, :destroy]
     resources :stores, only: [:index, :create, :show, :update, :destroy]
     resources :items, only: [:index, :create, :show, :update, :destroy]
-
+    resources :favorites, only: [:create, :destroy]
+    
     namespace :search do
       resources :items, only: [:index]
       resources :stores, only: [:index]

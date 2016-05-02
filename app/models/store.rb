@@ -6,4 +6,6 @@ class Store < ActiveRecord::Base
   validates_presence_of :user
 
   has_many :items, dependent: :destroy
+
+  has_many :favorites, as: :favoritable, dependent: :destroy
 end

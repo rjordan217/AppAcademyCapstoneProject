@@ -23,6 +23,18 @@ function removeItem(item) {
   _items = _.omit(_items, item.id);
 }
 
+function addFavorite(like) {
+  _items[like.favoritable_id]['favorites'].push(like);
+}
+
+function removeFavorite(like) {
+  var favs = _items[like.favoritable_id]['favorites'];
+  var idxToDelete = favs.indexOf(like);
+  if (idxToDelete >= 0) {
+    favs.splice(idxToDelete, 1);
+  }
+}
+
 // ItemStore.allErrors = function() {
 //   return _authErrors.slice();
 // };
@@ -55,6 +67,14 @@ ItemStore.__onDispatch = function(payload) {
       break;
     case ItemConstants.ITEM_DESTROYED:
       removeItem(payload.item);
+      ItemStore.__emitChange();
+      break;
+    case ItemConstants.FAVORITE_ADDED:
+      addFavorite(payload.favorite);
+      ItemStore.__emitChange();
+      break;
+    case ItemConstants.FAVORITE_REMOVED:
+      removeFavorite(payload.favorite);
       ItemStore.__emitChange();
       break;
   }

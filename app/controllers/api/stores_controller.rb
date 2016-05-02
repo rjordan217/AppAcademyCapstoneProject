@@ -4,18 +4,15 @@ class Api::StoresController < ApplicationController
   before_action :ensure_store_owner, only: [:update, :destroy]
 
   def index
-    @stores = Store.all
+    @stores = Store.all.includes(:favorites)
     render :index
   end
 
   def create
     @store = Store.new(store_params.merge({user_id: current_user.id}))
-    if @store.save
-      render :show
-    else
-      flash.now[:errors] = @store.errors.full_messages
-      render :show, status: 401
-    end
+    @store.save
+    @errors += @store.errors.full_messages
+    render :show
   end
 
   def show
@@ -23,16 +20,14 @@ class Api::StoresController < ApplicationController
   end
 
   def update
-    if @store.update_attributes(store_params)
-      render :show
-    else
-      flash.now[:errors] = @store.errors.full_messages
-      render :show, status: 401
-    end
+    @store.update_attributes(store_params)
+    @errors += @store.errors.full_messages
+    render :show
   end
 
   def destroy
     @store.destroy
+    @errors += @store.errors.full_messages
     render :show
   end
 

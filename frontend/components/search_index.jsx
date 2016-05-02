@@ -2,11 +2,18 @@ var React = require('react'),
     SearchActions = require('../actions/search_actions'),
     StoresIndex = require('./stores_index'),
     ItemsIndex = require('./items_index');
-// <SearchFilters switchModeCallback={this.switchMode} />
+
+    // <SearchFilter currentMode={this.state.searchMode}
+    //   currentFilter={this.state.searchFilter}
+    //   switchMode={this.switchMode}
+    //   switchFilter={this.switchFilter} />
+
+
 var SearchIndex = React.createClass({
   getInitialState: function() {
     return {
-      searchMode: "by store"
+      searchMode: "by store",
+      searchFilter: "most favorited"
     };
   },
 
@@ -22,6 +29,10 @@ var SearchIndex = React.createClass({
   switchMode: function(newMode) {
     this.setState({searchMode: newMode})
   },
+//TODO: Pass in filter to search params
+  switchFilter: function(newFilter) {
+    this.setState({searchFilter: newFilter})
+  },
 
   render: function() {
     var content;
@@ -33,8 +44,6 @@ var SearchIndex = React.createClass({
 
     return (
       <div className="search-index">
-        <SearchFilter currentFilter={this.state.searchMode}
-          switchCB={this.switchMode} />
         {content}
       </div>
     );

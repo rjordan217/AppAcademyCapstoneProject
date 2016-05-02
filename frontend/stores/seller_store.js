@@ -23,6 +23,18 @@ function removeSeller(seller) {
   _sellers = _.omit(_sellers, seller.id);
 }
 
+function addFavorite(like) {
+  _sellers[like.favoritable_id]['favorites'].push(like);
+}
+
+function removeFavorite(like) {
+  var favs = _sellers[like.favoritable_id]['favorites'];
+  var idxToDelete = favs.indexOf(like);
+  if (idxToDelete >= 0) {
+    favs.splice(idxToDelete, 1);
+  }
+}
+
 // SellerStore.allErrors = function() {
 //   return _authErrors.slice();
 // };
@@ -55,6 +67,14 @@ SellerStore.__onDispatch = function(payload) {
       break;
     case SellerConstants.STORE_DESTROYED:
       removeSeller(payload.seller);
+      SellerStore.__emitChange();
+      break;
+    case SellerConstants.FAVORITE_ADDED:
+      addFavorite(payload.favorite);
+      SellerStore.__emitChange();
+      break;
+    case SellerConstants.FAVORITE_REMOVED:
+      removeFavorite(payload.favorite);
       SellerStore.__emitChange();
       break;
   }

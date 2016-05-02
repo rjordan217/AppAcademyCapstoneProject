@@ -4,20 +4,19 @@ class Api::ItemsController < ApplicationController
   before_action :ensure_item_owner, only: [:update, :destroy]
 
   def index
-    @items = Item.where(store_id: params[:store_id])
+    @items = Item.where(store_id: params[:store_id]).includes(:favorites)
     render :index
   end
 
   def create
     @item = Item.new(item_params)
     if @item.store.user_id != current_user.id
-      flash.now[:errors] = ["Attempted to submit with other store id"]
-      render :show
-    elsif @item.save
+      @errors = ["Attempted to submit with other store id"]
       render :show
     else
-      flash.now[:errors] = @item.errors.full_messages
-      render :show, status: 401
+      @item.save
+      @errors = @item.errors.full_messages
+      render :show
     end
   end
 
@@ -26,12 +25,9 @@ class Api::ItemsController < ApplicationController
   end
 
   def update
-    if @item.update_attributes(item_params.except(:store_id))
-      render :show
-    else
-      flash.now[:errors] = @item.errors.full_messages
-      render :show, status: 401
-    end
+    @item.update_attributes(item_params.except(:store_id))
+    @errors = @item.errors.full_messages
+    render :show
   end
 
   def destroy
@@ -60,7 +56,7 @@ class Api::ItemsController < ApplicationController
   def ensure_item_owner
     if current_user.id != @item.store.user_id
       flash[:errors] = ["Must be store owner to edit or destroy items"]
-      redirect_to api_store_url(@item.store)
+      redirect_to root
     end
   end
 end

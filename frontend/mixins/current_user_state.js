@@ -3,7 +3,9 @@ var UserStore = require('../stores/user_store'),
 
 var CurrentUserStateMixin = {
   getInitialState: function() {
-    UserApiUtil.fetchCurrentUser();
+    if(!UserStore.getCurrentUser().username) {
+      UserApiUtil.fetchCurrentUser();
+    }
     return {
       currentUser: UserStore.getCurrentUser(),
       authErrors: UserStore.allErrors()
