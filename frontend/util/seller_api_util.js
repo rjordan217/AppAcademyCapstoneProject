@@ -21,12 +21,13 @@ var SellerApiUtil = {
       });
   },
 
-  create: function(storeParams) {
+  create: function(storeParams, successCallback) {
     $.ajax({
         method: 'POST',
         url: '/api/stores',
         data: {store: storeParams},
         success: function(store) {
+          successCallback();
           ServerActions.addSeller(store);
         }
       });

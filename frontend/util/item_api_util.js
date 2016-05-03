@@ -22,12 +22,13 @@ var ItemApiUtil = {
       });
   },
 
-  create: function(itemParams) {
+  create: function(itemParams, successCallback) {
     $.ajax({
         method: 'POST',
         url: '/api/items',
         data: {item: itemParams},
         success: function(item) {
+          successCallback();
           ServerActions.addItem(item);
         }
       });

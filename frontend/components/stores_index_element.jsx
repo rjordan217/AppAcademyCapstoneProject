@@ -18,7 +18,8 @@ var StoresIndexElement = React.createClass({
         <img src={store.main_pic_url} />
         <h3>{store.store_name}</h3>
         {this.state.currentUser.username ? <FavoriteButton favorites={store.favorites}
-          favoritable={{type: "Store", id: store.id}} /> : null}
+          favoritable={{type: "Store", id: store.id}}
+          storeName={store.store_name} /> : null}
       </div>
     );
   }

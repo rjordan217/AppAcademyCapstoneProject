@@ -15,7 +15,7 @@ var AuthForm = React.createClass({
   getInitialState: function() {
     return {
       inProgress: false,
-      imageUrl: "",
+      imageUrl: "/assets/default_profile_pic.jpg",
       username: "",
       password: ""
     };
@@ -100,7 +100,8 @@ var AuthForm = React.createClass({
         authHeader = (
           <div>
             <h2>Sign Up</h2>
-            <ImageUpload passUrlToParent={this._passUpImageUrl} />
+            <ImageUpload passUrlToParent={this._passUpImageUrl}
+              defaultURL={this.state.imageUrl} formType="user" />
           </div>
         );
         innerText = (this.state.inProgress ? "Registering..." : "Register");

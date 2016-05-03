@@ -29,7 +29,12 @@ function addFavorite(like) {
 
 function removeFavorite(like) {
   var favs = _items[like.favoritable_id]['favorites'];
-  var idxToDelete = favs.indexOf(like);
+  var idxToDelete = -1;
+  favs.forEach(function(fav, idx) {
+    if(fav.favoritable_id === like.favoritable_id) {
+      idxToDelete = idx;
+    }
+  });
   if (idxToDelete >= 0) {
     favs.splice(idxToDelete, 1);
   }

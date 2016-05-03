@@ -18,7 +18,8 @@ var ItemIndexElement = React.createClass({
         <h3>{item.title}</h3>
         <p>{item.price.toFixed(2)}</p>
         {this.state.currentUser.username ? <FavoriteButton favorites={item.favorites}
-          favoritable={{type: "Item", id: item.id}} /> : null}
+          favoritable={{type: "Item", id: item.id}}
+          itemName={item.title} /> : null}
       </div>
     );
   }

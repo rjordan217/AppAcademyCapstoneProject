@@ -33,7 +33,7 @@ class Api::StoresController < ApplicationController
 
   private
   def store_params
-    params.require(:store).permit(:store_name, :description)
+    params.require(:store).permit(:store_name, :description, :main_pic_url)
   end
 
   def find_store

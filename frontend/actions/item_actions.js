@@ -10,8 +10,8 @@ var ItemActions = {
     ItemApiUtil.getItemById(item_id);
   },
 
-  create: function(itemParams) {
-    ItemApiUtil.create(itemParams);
+  create: function(itemParams, successCallback) {
+    ItemApiUtil.create(itemParams, successCallback);
   },
 
   destroy: function() {

@@ -3,7 +3,7 @@ var React = require('react');
 var ImageUpload = React.createClass({
   getInitialState: function() {
     return {
-      imageUrl: "/assets/default_profile_pic.jpg"
+      imageUrl: this.props.defaultURL
     };
   },
   componentWillMount: function() {
@@ -29,9 +29,21 @@ var ImageUpload = React.createClass({
       backgroundImage: "url('" + this.state.imageUrl + "')",
       backgroundSize: 'cover'
     };
+    var buttonText;
+    switch (this.props.formType) {
+      case "user":
+        buttonText = "Set Profile Picture";
+        break;
+      case "store":
+        buttonText = "Set Main Store Picture";
+        break;
+      case "item":
+        buttonText = "Set Item Picture";
+        break;
+      }
     return (
       <div className="image-upload" style={profPicPOJO}>
-        <button onClick={this._upload}>Set Profile Picture</button>
+        <button onClick={this._upload}>{buttonText}</button>
       </div>
     );
   }

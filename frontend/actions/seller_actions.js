@@ -11,8 +11,8 @@ var SellerActions = {
     SellerApiUtil.getSellerById(store_id);
   },
 
-  create: function(storeParams) {
-    SellerApiUtil.create(storeParams);
+  create: function(storeParams, successCallback) {
+    SellerApiUtil.create(storeParams, successCallback);
   },
 
   destroy: function() {
