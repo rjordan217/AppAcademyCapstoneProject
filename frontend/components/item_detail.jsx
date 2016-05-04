@@ -2,11 +2,6 @@ var React = require('react'),
     ItemStore = require('../stores/item_store'),
     ItemActions = require('../actions/item_actions');
 
-    // if (!this.props.params) {
-    //   itemId = this.props.itemId;
-    // } else {
-    //   itemId = this.props.params.item_id || this.props.itemId;
-    // }
 
 var ItemDetail = React.createClass({
   getInitialState: function() {

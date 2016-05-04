@@ -4,11 +4,7 @@ var Store = require('flux/utils').Store,
     ItemStore = new Store(Dispatcher);
 
 var _items = {};
-// var _authErrors = [];
 
-// function resetErrors(errs) {
-//   _authErrors = errs;
-// }
 
 function addItem(item) {
   _items[item.id] = item
@@ -40,10 +36,6 @@ function removeFavorite(like) {
   }
 }
 
-// ItemStore.allErrors = function() {
-//   return _authErrors.slice();
-// };
-
 ItemStore.all = function() {
   var itemArray = [];
   Object.keys(_items).forEach(function(itemKey) {
@@ -58,10 +50,7 @@ ItemStore.getItemById = function(id) {
 
 ItemStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
-    // case ItemConstants.RECEIVE_ERRORS:
-    //   resetErrors(payload.errors);
-    //   ItemStore.__emitChange();
-    //   break;
+
     case ItemConstants.RECEIVE_ITEMS:
       resetItems(payload.items);
       ItemStore.__emitChange();

@@ -4,11 +4,6 @@ var React = require('react'),
     SearchFilter = require('./search_filter'),
     ItemsIndex = require('./items_index');
 
-    // <SearchFilter currentMode={this.state.searchMode}
-    //   currentFilter={this.state.searchFilter}
-    //   switchMode={this.switchMode}
-    //   switchFilter={this.switchFilter} />
-
 
 var SearchIndex = React.createClass({
   getInitialState: function() {

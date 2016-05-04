@@ -1,6 +1,4 @@
-// TODO: Convert to modal -
-// isOpen:bool onRequestClose:function afterOpenModal:function closeTimeoutMS:number
-// style:POJO
+
 
 var React = require('react'),
     LinkedStateMixin = require('react-addons-linked-state-mixin');

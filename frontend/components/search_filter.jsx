@@ -2,8 +2,6 @@ var React = require('react'),
     FILTERS = require('../constants/search_filter_constants').FILTERS,
     MODES = require('../constants/search_filter_constants').MODES;
 
-// Need to pass in callback to switch searchIndex items
-// onClick={this.props.switchCB.bind(filter)}
 
 var SearchFilter = React.createClass({
 
