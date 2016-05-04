@@ -1,5 +1,6 @@
 var SellerApiUtil = require('../util/seller_api_util'),
-    SellerStore = require('../stores/seller_store');
+    SellerStore = require('../stores/seller_store'),
+    ServerActions = require('./server_actions');
 
 var SellerActions = {
 
@@ -17,6 +18,10 @@ var SellerActions = {
 
   destroy: function() {
     SellerApiUtil.destroy();
+  },
+
+  resetSellers: function() {
+    ServerActions.setSellers([]);
   }
 
 };

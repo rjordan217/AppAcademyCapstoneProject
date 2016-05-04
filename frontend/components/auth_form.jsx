@@ -60,6 +60,23 @@ var AuthForm = React.createClass({
     );
   },
 
+  demoLogin: function() {
+    var demoUsername = "pet_lover_demo";
+    var idx = 0;
+    var self = this;
+    function typingCallback() {
+      idx += 1;
+      self.setState({ username: demoUsername.slice(0,idx) });
+      if (idx === demoUsername.length) {
+        self.setState({password: '123123'});
+        self._submitLogin({preventDefault: function(){} });
+      } else {
+        setTimeout(typingCallback, 150);
+      }
+    }
+    typingCallback();
+  },
+
   render: function() {
     var ErrorGroup;
     if (this.state.authErrors.length !== 0) {
@@ -90,10 +107,14 @@ var AuthForm = React.createClass({
         authHeader = <h2>Sign In</h2>;
         innerText = (this.state.inProgress ? "Logging in..." : "Login");
         authButton = (
-          <button disabled={this.state.inProgress}
-            onClick={this._submitLogin}>
-            {innerText}
-          </button>
+          <div>
+            <button disabled={this.state.inProgress}
+              onClick={this._submitLogin}>
+              {innerText}
+            </button>
+            <button disabled={this.state.inProgress}
+              onClick={this.demoLogin}>Demo Login</button>
+          </div>
         );
         break;
       case "register":

@@ -55,7 +55,7 @@ var ItemsIndex = React.createClass({
       var stores = this.state.currentUser.stores.map(function(store) {
         return store.id;
       });
-      if (stores.includes(this.state.associatedStore.id)) {
+      if (this.state.associatedStore && stores.includes(this.state.associatedStore.id)) {
         content.push(
           <div className="item-index-el" key={-1}>
             <h3>Add Item</h3>

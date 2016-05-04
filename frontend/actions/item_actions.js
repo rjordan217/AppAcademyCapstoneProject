@@ -1,4 +1,5 @@
-var ItemApiUtil = require('../util/item_api_util');
+var ItemApiUtil = require('../util/item_api_util'),
+    ServerActions = require('./server_actions');
 
 var ItemActions = {
 
@@ -16,6 +17,10 @@ var ItemActions = {
 
   destroy: function() {
     ItemApiUtil.destroy();
+  },
+
+  resetItems: function() {
+    ServerActions.setItems([]);
   }
 
 };

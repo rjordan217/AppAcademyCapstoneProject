@@ -1,6 +1,7 @@
 var React = require('react'),
     SearchActions = require('../actions/search_actions'),
     StoresIndex = require('./stores_index'),
+    SearchFilter = require('./search_filter'),
     ItemsIndex = require('./items_index');
 
     // <SearchFilter currentMode={this.state.searchMode}
@@ -12,8 +13,8 @@ var React = require('react'),
 var SearchIndex = React.createClass({
   getInitialState: function() {
     return {
-      searchMode: "by store",
-      searchFilter: "most favorited"
+      searchMode: "Show Stores",
+      searchFilter: "No Filter"
     };
   },
 
@@ -27,23 +28,33 @@ var SearchIndex = React.createClass({
   },
 
   switchMode: function(newMode) {
-    this.setState({searchMode: newMode})
+    this.setState({searchMode: newMode});
   },
-//TODO: Pass in filter to search params
+
   switchFilter: function(newFilter) {
-    this.setState({searchFilter: newFilter})
+    this.setState({searchFilter: newFilter});
+    alert("Search filters for favorites and taggings have not been implemented yet!");
   },
 
   render: function() {
     var content;
-    if (this.state.searchMode === "by store") {
-      content = <StoresIndex fetchedBySearch={true} />;
-    } else {
-      content = <ItemsIndex fetchedBySearch={true} />;
+
+    switch (this.state.searchMode) {
+      case "Show Stores":
+        content = <StoresIndex fetchedBySearch={true} />;
+        break;
+      case "Show Items":
+        content = <ItemsIndex fetchedBySearch={true} />;
+        break;
     }
 
     return (
       <div className="search-index">
+        <SearchFilter
+          changeModeCB={this.switchMode}
+          currentMode={this.state.searchMode}
+          changeFilterCB={this.switchFilter}
+          currentFilter={this.state.searchFilter} />
         {content}
       </div>
     );

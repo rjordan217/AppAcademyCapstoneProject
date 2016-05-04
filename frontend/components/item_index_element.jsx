@@ -7,7 +7,7 @@ var ItemIndexElement = React.createClass({
   mixins: [CurrentUserStateMixin],
 
   _getDetail: function() {
-    HashHistory.push(this.props.location.pathname + '/items/' + this.props.item.id);
+    HashHistory.push('/stores/' + this.props.item.store_id + '/items/' + this.props.item.id);
   },
 
   render: function() {

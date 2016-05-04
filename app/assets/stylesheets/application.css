@@ -313,3 +313,18 @@ button {
 .favorite-button button:hover {
   -webkit-text-stroke: 1px #2b2;
 }
+
+.search-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-mode-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-filters-list {
+  display: flex;
+  flex-direction: column;
+}

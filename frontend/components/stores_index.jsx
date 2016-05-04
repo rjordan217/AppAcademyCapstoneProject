@@ -13,7 +13,7 @@ var StoresIndex = React.createClass({
 
   getInitialState: function() {
     return {
-      stores: [],
+      stores: SellerStore.all(),
       createStoreOpen: false
     };
   },
@@ -49,7 +49,7 @@ var StoresIndex = React.createClass({
     });
 
     if (content.length === 0 && this.props.fetchedBySearch) {
-      content = <h3>No stores matched this search.</h3>;
+      content = [<h3 key={1}>No stores matched this search.</h3>];
     }
 //TODO
     if (this.state.currentUser.username) {

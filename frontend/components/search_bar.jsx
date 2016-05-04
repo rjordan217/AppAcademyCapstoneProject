@@ -1,6 +1,8 @@
 var React = require('react'),
     LinkedStateMixin = require('react-addons-linked-state-mixin'),
     InProgressMixin = require('../mixins/in_progress'),
+    SellerActions = require('../actions/seller_actions'),
+    ItemActions = require('../actions/item_actions'),
     HashHistory = require('react-router').hashHistory;
 
 var SearchBar = React.createClass({
@@ -13,7 +15,9 @@ var SearchBar = React.createClass({
 
   _submitSearch: function() {
     this._disable();
-    setTimeout(this._reenable, 1000);
+    setTimeout(this._reenable, 500);
+    SellerActions.resetSellers();
+    ItemActions.resetItems();
     HashHistory.push("/search/" + encodeURIComponent(this.state.searchParams));
   },
 

@@ -1,3 +1,13 @@
 module.exports = {
-  FILTERS: ["most favorited", "least favorited", "most tagged", "least tagged"]
+  MODES: [
+    "Show Stores",
+    "Show Items"
+  ],
+  FILTERS: [
+    "Most Favorited",
+    "Least Favorited",
+    "Most Tagged",
+    "Least Tagged",
+    "No Filter"
+  ]
 };
