@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 200.times do |i|
-  User.create!(username: "petlover#{i}", password: "123123")
+  User.create!(username: "pet_lover_#{i}", password: "123123")
 end
 
 
