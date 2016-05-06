@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502170531) do
+ActiveRecord::Schema.define(version: 20160504221841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20160502170531) do
   add_index "favorites", ["user_id", "favoritable_id"], name: "index_favorites_on_user_id_and_favoritable_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
+  create_table "item_requests", force: :cascade do |t|
+    t.integer  "order_id",               null: false
+    t.integer  "item_id",                null: false
+    t.integer  "quantity",   default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "item_requests", ["item_id"], name: "index_item_requests_on_item_id", using: :btree
+  add_index "item_requests", ["order_id", "item_id"], name: "index_item_requests_on_order_id_and_item_id", unique: true, using: :btree
+  add_index "item_requests", ["order_id"], name: "index_item_requests_on_order_id", using: :btree
+
   create_table "items", force: :cascade do |t|
     t.integer  "store_id",                                                 null: false
     t.string   "title",                                                    null: false
@@ -39,6 +51,15 @@ ActiveRecord::Schema.define(version: 20160502170531) do
   end
 
   add_index "items", ["store_id"], name: "index_items_on_store_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.boolean  "placed",     default: false
+    t.integer  "user_id",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "store_name",                                             null: false
@@ -62,6 +83,9 @@ ActiveRecord::Schema.define(version: 20160502170531) do
   end
 
   add_foreign_key "favorites", "users"
+  add_foreign_key "item_requests", "items"
+  add_foreign_key "item_requests", "orders"
   add_foreign_key "items", "stores"
+  add_foreign_key "orders", "users"
   add_foreign_key "stores", "users"
 end

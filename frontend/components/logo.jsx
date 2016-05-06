@@ -2,9 +2,9 @@ var React = require('react'),
     HashHistory = require('react-router').hashHistory;
 
 var Logo = React.createClass({
-  
+
   _goHome: function() {
-    HashHistory.push('#');
+    HashHistory.push('/stores');
   },
 
   render: function() {

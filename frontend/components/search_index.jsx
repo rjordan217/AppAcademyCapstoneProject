@@ -50,7 +50,9 @@ var SearchIndex = React.createClass({
           currentMode={this.state.searchMode}
           changeFilterCB={this.switchFilter}
           currentFilter={this.state.searchFilter} />
-        {content}
+        <div className="with-sidebar">
+          {content}
+        </div>
       </div>
     );
   }

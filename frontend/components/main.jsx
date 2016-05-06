@@ -1,17 +1,18 @@
 var React = require('react'),
-    NavBar = require('./nav_bar'),
-    ImageCarousel = require('./image_carousel'),
-    StoresIndex = require('./stores_index');
+    StoresIndex = require('./stores_index'),
+    HashHistory = require('react-router').hashHistory;
 
 var Main = React.createClass({
+  _directToStores: function(e) {
+    e.preventDefault();
+    HashHistory.push('/stores');
+  },
 
   render: function() {
     return (
       <div className="main">
-        <div className="index-container">
-          <ImageCarousel />
-          <StoresIndex />
-        </div>
+        <h1>Petsy - Your Specialty Pet Marketplace!</h1>
+        <button onClick={this._directToStores}>Get Started →</button>
       </div>
     );
   }

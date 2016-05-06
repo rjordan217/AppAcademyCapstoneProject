@@ -43,7 +43,7 @@ class Api::StoresController < ApplicationController
   def ensure_logged_in
     if current_user.nil?
       flash[:errors] = ["Must be logged in to make or edit stores."]
-      redirect_to root
+      redirect_to '/'
     end
   end
 

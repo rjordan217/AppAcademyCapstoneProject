@@ -1,6 +1,7 @@
 var React = require('react'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
     FavoriteActions = require('../actions/favorite_actions'),
+    Dropdown = require('./dropdown'),
     InProgressMixin = require('../mixins/in_progress');
 
 // TODO: handle removing favorites
@@ -10,7 +11,8 @@ var FavoriteButton = React.createClass({
 
   getInitialState: function() {
     return {
-      isFavorited: false
+      isFavorited: false,
+      hovered: false
     };
   },
 
@@ -59,23 +61,40 @@ var FavoriteButton = React.createClass({
     }
   },
 
+  _hovered: function() {
+    this.setState({hovered: true});
+  },
+
+  _unhovered: function() {
+    this.setState({hovered: false});
+  },
+
   render: function() {
-    var text, onClickAction, estilo;
+    var text, onClickAction, estilo, total;
+    var calcStyle = {
+      top: '30px',
+      left: '-65px'
+    };
     if(this.state.isFavorited) {
-      text = <p>Unfavorite {this.props.favoritable.type}</p>;
+      text = <p className="fav-text" key={1}>Unfavorite {this.props.favoritable.type}</p>;
       onClickAction = this._unfavoriteObj;
       estilo = {color: 'red'};
     } else {
-      text = <p>Favorite {this.props.favoritable.type}</p>;
+      text = <p className="fav-text" key={1}>Favorite {this.props.favoritable.type}</p>;
       onClickAction = this._favoriteObj;
       estilo = {color: 'white'};
     }
+    total = <p className="fav-text" key={2}>Total favorites: {this.props.favorites.length}</p>;
     return (
-      <div className="favorite-button">
-        {text}
+      <div className="favorite-button droppable">
+        <Dropdown text={[text, total]}
+          visible={this.state.hovered}
+          calcStyle={calcStyle}/>
         <button onClick={onClickAction}
           disabled={this.state.inProgress}
-          style={estilo}>
+          style={estilo}
+          onMouseEnter={this._hovered}
+          onMouseLeave={this._unhovered}>
           {this.state.inProgress ? "..." : "❤"}
         </button>
       </div>

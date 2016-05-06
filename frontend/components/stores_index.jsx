@@ -1,6 +1,7 @@
 var React = require('react'),
     SellerStore = require('../stores/seller_store'),
     SellerActions = require('../actions/seller_actions'),
+    ImageCarousel = require('./image_carousel'),
     NewStoreForm = require('./new_store_form'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
     Modal = require('react-modal'),
@@ -71,8 +72,11 @@ var StoresIndex = React.createClass({
     }
 
     return (
-      <div className="stores-index">
-        {content}
+      <div className="index-container">
+        <ImageCarousel />
+        <div className="stores-index">
+          {content}
+        </div>
       </div>
     );
   }

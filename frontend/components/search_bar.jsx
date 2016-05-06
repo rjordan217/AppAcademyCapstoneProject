@@ -27,15 +27,23 @@ var SearchBar = React.createClass({
     }
   },
 
+  _submitIfEnter: function(e) {
+    if (e.keyCode === 13) {
+      this._submitSearch();
+    }
+  },
+
   render: function() {
     return (
       <div className="search-bar">
         <input type="search"
           valueLink={this.linkState("searchParams")}
-          onClick={this._setEmpty} />
+          onClick={this._setEmpty}
+          onKeyDown={this._submitIfEnter} />
         <button
           onClick={this._submitSearch}
           disabled={this.state.inProgress}
+          onKeyDown={this._submitIfEnter}
           >{this.state.inProgress ? "Searching..." : "Search"}
         </button>
       </div>

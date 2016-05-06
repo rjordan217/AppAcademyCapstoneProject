@@ -1,7 +1,9 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     UserConstants = require('../constants/user_constants'),
     ItemConstants = require('../constants/item_constants'),
-    SellerConstants = require('../constants/seller_constants');
+    SellerConstants = require('../constants/seller_constants'),
+    OrderConstants = require('../constants/order_constants'),
+    ItemRequestConstants = require('../constants/item_request_constants');
 
 var ServerActions = {
   setUserErrors: function(errors) {
@@ -76,6 +78,54 @@ var ServerActions = {
         payload['actionType'] = ItemConstants.FAVORITE_REMOVED;
         break;
     }
+    Dispatcher.dispatch(payload);
+  },
+  addOrder: function (order) {
+    var payload = {
+      actionType: OrderConstants.ORDER_ADDED,
+      order: order
+    };
+    Dispatcher.dispatch(payload);
+  },
+  setCurrentOrder: function(order) {
+    var payload = {
+      actionType: OrderConstants.CURRENT_ORDER_SET,
+      order: order
+    };
+    Dispatcher.dispatch(payload);
+  },
+  updateOrder: function(order) {
+    var payload = {
+      actionType: OrderConstants.ORDER_UPDATED,
+      order: order
+    };
+    Dispatcher.dispatch(payload);
+  },
+  removeOrder: function(order) {
+    var payload = {
+      actionType: OrderConstants.ORDER_REMOVED,
+      order: order
+    };
+    Dispatcher.dispatch(payload);
+  },
+  resetOrders: function() {
+    var payload = {
+      actionType: OrderConstants.ORDERS_RESET
+    };
+    Dispatcher.dispatch(payload);
+  },
+  addItemRequest: function(itemRequest) {
+    var payload = {
+      actionType: ItemRequestConstants.ITEM_REQUEST_ADDED,
+      itemRequest: itemRequest
+    };
+    Dispatcher.dispatch(payload);
+  },
+  removeItemRequest: function(itemRequest) {
+    var payload = {
+      actionType: ItemRequestConstants.ITEM_REQUEST_REMOVED,
+      itemRequest: itemRequest
+    };
     Dispatcher.dispatch(payload);
   }
 };

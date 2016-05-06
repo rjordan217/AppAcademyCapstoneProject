@@ -4,6 +4,7 @@ var React = require('react'),
     AuthForm = require('./auth_form'),
     SearchBar = require('./search_bar'),
     ShoppingCartIcon = require('./shopping_cart_icon'),
+    OrderActions = require('../actions/order_actions'),
     Modal = require('react-modal'),
     modalStyle = require('../styles/auth_modal'),
     CurrentUserStateMixin = require('../mixins/current_user_state');
@@ -32,6 +33,7 @@ var NavBar = React.createClass({
   },
   _logout: function() {
     UserActions.logout(this.closeModal);
+    OrderActions.resetOrders();
     this.setState({
       modalOpen: true,
       authType: "logout"

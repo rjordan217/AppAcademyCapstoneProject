@@ -5,6 +5,9 @@ var NavBar = require('./components/nav_bar'),
     ItemsIndex = require('./components/items_index'),
     ItemDetail = require('./components/item_detail'),
     SearchIndex = require('./components/search_index'),
+    OrderActions = require('./actions/order_actions'),
+    OrdersIndex = require('./components/orders_index'),
+    OrderShow = require('./components/order_show'),
     Router = require('react-router').Router,
     Route = require('react-router').Route,
     IndexRoute = require('react-router').IndexRoute,
@@ -29,10 +32,17 @@ var App = React.createClass({
 var routes = (
   <Route path='/' component={App}>
     <IndexRoute component={Main} />
-    <Route path='stores/:store_id' component={StoreDetail}>
-      <IndexRoute component={ItemsIndex} />
-      <Route path='items/:item_id' component={ItemDetail} />
+    <Route path='/stores'>
+      <IndexRoute component={StoresIndex} />
+      <Route path=':store_id' component={StoreDetail}>
+        <IndexRoute component={ItemsIndex} />
+        <Route path='items/:item_id' component={ItemDetail} />
+      </Route>
     </Route>
+    <Route path='/orders' component={OrdersIndex}>
+      <Route path=':order_id' component={OrderShow} />
+    </Route>
+    <Route path='/cart' component={OrderShow} />
     <Route path='search/:encoded_search_params' component={SearchIndex} />
   </Route>
 );

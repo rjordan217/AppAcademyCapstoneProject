@@ -97,6 +97,40 @@ body {
  *
  */
 
+ .main {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   /* Set up proportionate scaling */
+   width: 100%;
+   min-height: 100vh;
+
+   /* Set up positioning */
+   z-index: -1;
+   background: url('/assets/splash_image') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+   background-size: cover;
+ }
+
+ .main * {
+   margin: 10px;
+ }
+
+ .main h1 {
+   padding: 10px;
+   background: #3d3;
+   background: -webkit-linear-gradient(#2b2, #3d3);
+   background: -o-linear-gradient(#2b2, #3d3);
+   background: -moz-linear-gradient(#2b2, #3d3);
+   background: linear-gradient(#2b2, #3d3);
+   border-radius: 10px;
+   color: white;
+   text-align: center;
+ }
+
  .index-container {
    margin: auto;
    padding-top: 20px;
@@ -112,10 +146,26 @@ body {
    width: 100%;
  }
 
+ .image-carousel * {
+   background-color: #eee;
+ }
+
  .image-carousel img {
-   max-height: 500px;
+   max-width: 80vw;
+   height: 500px;
    width: auto;
    margin: auto;
+ }
+
+ .image-carousel h2 {
+   padding: 15px 10px 0 10px;
+   text-align: center;
+ }
+
+ .image-carousel p {
+   padding: 10px;
+   line-height: 150%;
+   text-indent: 3em;
  }
 
 /*  NavBar styling
@@ -125,6 +175,7 @@ body {
  */
 
 .nav-bar {
+  z-index: 4;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -211,6 +262,7 @@ body {
   border: 1px solid black;
 }
 
+
 #cart-size {
   margin: 0;
   padding: 0 5px;
@@ -249,7 +301,7 @@ button {
     border-radius: 5px;
 }
 
-.auth-form button:hover {
+button:hover {
   background: #2b2;
   background: -webkit-linear-gradient(#3d3, #2b2);
   background: -o-linear-gradient(#3d3, #2b2);
@@ -260,6 +312,10 @@ button {
 .auth-form * {
   margin: 10px 5px 10px 5px;
   position: relative;
+}
+
+.auth-errors {
+  color: red;
 }
 
 .close-modal {
@@ -301,10 +357,6 @@ button {
   flex-wrap: nowrap;
 }
 
-.favorite-button {
-  text-align: center;
-}
-
 .favorite-button button {
   padding: 5px;
   -webkit-text-stroke: 1px black;
@@ -314,17 +366,113 @@ button {
   -webkit-text-stroke: 1px #2b2;
 }
 
+.dropdown {
+  position: absolute;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px;
+  color: black;
+  background-color: rgba(255,255,255,.9);
+  box-shadow: 5px 5px 3px #454;
+  width: 150px;
+  z-index: 3;
+}
+
+.cart-icon .dropdown {
+  margin: 0;
+  padding: 0;
+}
+
+.cart-icon .dropdown * {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown:hover {
+    background-color: white;
+}
+
 .search-filter {
+  position: fixed;
+  z-index: 2;
+  background-color: #2b2;
+  box-shadow: 5px 5px 3px #454;
+  width: 20vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+
+.search-filter * {
+  padding: 5px 0 5px 5px;
 }
 
 .search-mode-list {
+  height: 10vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
-.search-filters-list {
+.search-filter-list {
+  height: 30vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+
+.with-sidebar {
+  margin-left: 20vw;
+}
+
+.liftable {
+  box-shadow: 5px 5px 3px #454;
+}
+
+.liftable:hover {
+  transform: translate(0, -5px);
+    -webkit-transform: translate(0, -5px); /** Chrome & Safari **/
+    -o-transform: translate(0, -5px); /** Opera **/
+    -moz-transform: translate(0, -5px); /** Firefox **/
+  transition: all .25s ease-out;
+    -webkit-transition: all .25s ease-out; /** Chrome & Safari **/
+    -moz-transition: all .25s ease-out; /** Firefox **/
+    -o-transition: all .25s ease-out; /** Opera **/
+}
+
+.droppable {
+  position: relative;
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+  background-color: #eee;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+footer * {
+  margin: 5px;
+}
+
+footer p {
+  opacity: 0.5;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icons img {
+  width: 30px;
+  opacity: 0.5;
+  height: 30px;
+}
+
+.icons img:hover {
+  opacity: 1;
 }

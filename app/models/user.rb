@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   has_many :items_for_sale, through: :stores, source: :items
 
+  has_many :item_requests, through: :orders
+
+  has_many :orders, dependent: :destroy
+
   after_initialize :ensure_session_token
 
   attr_reader :password

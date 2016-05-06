@@ -22,6 +22,7 @@ var SellerApiUtil = {
   },
 
   create: function(storeParams, successCallback) {
+    console.log(storeParams);
     $.ajax({
         method: 'POST',
         url: '/api/stores',

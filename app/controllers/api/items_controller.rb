@@ -49,14 +49,14 @@ class Api::ItemsController < ApplicationController
   def ensure_logged_in
     if current_user.nil?
       flash[:errors] = ["Must be logged in to make or edit items."]
-      redirect_to root
+      redirect_to '/'
     end
   end
 
   def ensure_item_owner
     if current_user.id != @item.store.user_id
       flash[:errors] = ["Must be store owner to edit or destroy items"]
-      redirect_to root
+      redirect_to '/'
     end
   end
 end
