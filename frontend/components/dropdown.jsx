@@ -9,7 +9,7 @@ var Dropdown = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     if (!nextProps.receivedFocus) {
-      setTimeout(this.resetFocus, 500)
+      this.resetFocus();
     } else {
       this.setInFocus();
     }

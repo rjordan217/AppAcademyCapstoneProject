@@ -4,6 +4,7 @@ var React = require('react'),
     AuthForm = require('./auth_form'),
     SearchBar = require('./search_bar'),
     ShoppingCartIcon = require('./shopping_cart_icon'),
+    ProfThumbnail = require('./prof_thumbnail'),
     OrderActions = require('../actions/order_actions'),
     Modal = require('react-modal'),
     modalStyle = require('../styles/auth_modal'),
@@ -55,14 +56,10 @@ var NavBar = React.createClass({
         </div>
       );
     } else {
-      var profPicPOJO = {
-        backgroundImage: "url('" + this.state.currentUser.profile_pic_url + "')",
-        backgroundSize: '50px 50px'
-      }
       authButtons = (
         <div className="nav-auth">
           <ShoppingCartIcon />
-          <div className="prof-thumbnail" style={profPicPOJO}></div>
+          <ProfThumbnail userProf={this.state.currentUser} />
           <div onClick={this._logout}>Logout</div>
         </div>
       );

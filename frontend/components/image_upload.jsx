@@ -26,8 +26,7 @@ var ImageUpload = React.createClass({
   },
   render: function() {
     var profPicPOJO = {
-      backgroundImage: "url('" + this.state.imageUrl + "')",
-      backgroundSize: 'cover'
+      background: "white url('" + this.state.imageUrl + "') no-repeat center"
     };
     var buttonText;
     switch (this.props.formType) {

@@ -56,8 +56,8 @@ var ShoppingCartIcon = React.createClass({
       backgroundSize: '50px 50px'
     }
     var calcStyle = {
-      top: '45px',
-      left: '-65px'
+      top: '48px',
+      left: '-55px'
     };
     var manageCart;
     var clearCart;

@@ -18,7 +18,7 @@ var SearchFilter = React.createClass({
             {MODES.map(function(mode, idx) {
               return (
                 <li
-                  style={this.props.currentMode === mode ? selectedStyle : null}
+                  style={this.props.currentMode === mode ? selectedStyle : {cursor: 'pointer'}}
                   key={idx}
                   onClick={function(e) {
                     e.preventDefault();
@@ -36,7 +36,7 @@ var SearchFilter = React.createClass({
             {FILTERS.map(function(filter, idx) {
               return (
                 <li
-                  style={this.props.currentFilter === filter ? selectedStyle : null}
+                  style={this.props.currentFilter === filter ? selectedStyle : {cursor: 'pointer'}}
                   key={idx}
                   onClick={function(e) {
                     e.preventDefault();

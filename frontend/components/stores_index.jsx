@@ -4,6 +4,7 @@ var React = require('react'),
     ImageCarousel = require('./image_carousel'),
     NewStoreForm = require('./new_store_form'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
+    createStoreModalStyle = require('../styles/create_store_modal'),
     Modal = require('react-modal'),
     StoresIndexElement = require('./stores_index_element');
 
@@ -52,10 +53,8 @@ var StoresIndex = React.createClass({
     if (content.length === 0 && this.props.fetchedBySearch) {
       content = [<h3 key={1}>No stores matched this search.</h3>];
     }
-//TODO
-    if (this.state.currentUser.username) {
 
-      var createModalStyle = {};
+    if (this.state.currentUser.username && !this.props.fetchedBySearch) {
 
       content.push(
         <div className="store-index-el" key={-1}>
@@ -64,7 +63,7 @@ var StoresIndex = React.createClass({
           <Modal
             isOpen={this.state.createStoreOpen}
             onRequestClose={this.closeModal}
-            style={createModalStyle}>
+            style={createStoreModalStyle}>
             <NewStoreForm closeModalFun={this.closeModal} />
           </Modal>
         </div>
@@ -73,7 +72,7 @@ var StoresIndex = React.createClass({
 
     return (
       <div className="index-container">
-        <ImageCarousel />
+        { !this.props.fetchedBySearch ? <ImageCarousel /> : null}
         <div className="stores-index">
           {content}
         </div>

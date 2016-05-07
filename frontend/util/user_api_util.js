@@ -58,13 +58,14 @@ var UserApiUtil = { //TODO: Fix error handling
     });
   },
 
-  destroy: function() {
+  destroy: function(callback) {
     $.ajax({
       method: 'DELETE',
       url: '/api/user',
       success: function(user) {
         if(user.errors.length === 0) {
           ServerActions.setCurrentUser(user);
+          callback();
         } else {
           ServerActions.setUserErrors(user.errors);
         }

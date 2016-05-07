@@ -36,6 +36,7 @@
  .store-detail {
    flex-grow: 1;
    max-width: 600px;
+   min-width: 300px;
    padding: 20px;
    box-shadow: 5px 0 3px #ded;
    img {
@@ -50,4 +51,33 @@
    p {
      text-indent: 2.0em;
    }
+ }
+
+ .new-store-form {
+  * {
+   margin: 10px 5px 10px 5px;
+  }
+  h2 {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .image-upload {
+    float: left;
+    width: 250px;
+    min-height: 300px;
+    &:hover {
+      box-shadow: 3px 3px 7px #cdc;
+    }
+  }
+  .input-data {
+   margin: 120px auto 40px auto;
+   float: right;
+   textarea {
+     position: absolute;
+     margin: 0;
+   }
+  }
+  .create-button {
+   float: right;
+  }
  }

@@ -43,19 +43,22 @@ var NewStoreForm = React.createClass({
         <ImageUpload passUrlToParent={this._passUpImageUrl}
           defaultURL={this.state.main_pic_url} formType="store" />
 
-        <label>Store Name:
-          <input id="store_name" type="text" valueLink={this.linkState("store_name")} />
-        </label>
-        <br />
+        <div className="input-data">
+          <label>Store Name:
+            <input id="store_name" type="text" valueLink={this.linkState("store_name")} />
+          </label>
+          <br />
 
-        <label>Description:
-          <textarea id="description"
-            valueLink={this.linkState("description")}
-            onFocus={this._setEmpty}></textarea>
-        </label>
-        <br />
+          <label>Description:</label>
+            <textarea id="description"
+              valueLink={this.linkState("description")}
+              onFocus={this._setEmpty}></textarea>
 
-        <button onClick={this._submitStore}>Create Store</button>
+          <br />
+        </div>
+
+        <button className="create-button"
+          onClick={this._submitStore}>Create Store</button>
 
       </div>
     );

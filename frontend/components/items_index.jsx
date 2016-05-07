@@ -29,8 +29,8 @@ var ItemsIndex = React.createClass({
     if (!this.props.fetchedBySearch) {
       ItemActions.fetchItems(this.props.params.store_id);
     }
-
   },
+  
   componentWillUnmount: function() {
     this.itemListenerToken.remove();
   },

@@ -100,6 +100,7 @@ var AuthForm = React.createClass({
     var authHeader;
     var authButton;
     var innerText;
+    var classes = "auth-form ";
     switch (this.props.authType) {
       case "login":
         authHeader = <h2>Sign In</h2>;
@@ -114,15 +115,12 @@ var AuthForm = React.createClass({
               onClick={this.demoLogin}>Demo Login</button>
           </div>
         );
+        classes += "login";
         break;
       case "register":
-        authHeader = (
-          <div>
-            <h2>Sign Up</h2>
-            <ImageUpload passUrlToParent={this._passUpImageUrl}
-              defaultURL={this.state.imageUrl} formType="user" />
-          </div>
-        );
+        authHeader = <h2>Sign Up</h2>;
+        var imageUpload = <ImageUpload passUrlToParent={this._passUpImageUrl}
+          defaultURL={this.state.imageUrl} formType="user" />;
         innerText = (this.state.inProgress ? "Registering..." : "Register");
         authButton = (
           <button disabled={this.state.inProgress}
@@ -130,25 +128,30 @@ var AuthForm = React.createClass({
             {innerText}
           </button>
         );
+        classes += "register";
         break;
     }
     return (
-      <div className="auth-form">
+      <div className={classes}>
         <button onClick={this.props.closeModalFun} className="close-modal">x</button>
 
         {authHeader}
 
-        {ErrorGroup}
+        {imageUpload}
 
-        <label>Username:
-          <input id="username" type="text" valueLink={this.linkState("username")} />
-        </label>
-        <br />
+        <div>
+          {ErrorGroup}
 
-        <label>Password:
-          <input id="password" type="password" valueLink={this.linkState("password")}/>
-        </label>
-        <br />
+          <label>Username:
+            <input id="username" type="text" valueLink={this.linkState("username")} />
+          </label>
+          <br />
+
+          <label>Password:
+            <input id="password" type="password" valueLink={this.linkState("password")}/>
+          </label>
+          <br />
+        </div>
 
         {authButton}
       </div>

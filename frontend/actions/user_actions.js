@@ -19,8 +19,8 @@ var UserActions = {
     UserApiUtil.create(userParams, callback);
   },
 
-  destroy: function() {
-    UserApiUtil.destroy();
+  destroy: function(callback) {
+    UserApiUtil.destroy(callback);
   }
 
 };
