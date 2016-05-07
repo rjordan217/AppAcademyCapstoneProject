@@ -62,24 +62,28 @@ var ShoppingCartIcon = React.createClass({
     var manageCart;
     var clearCart;
     if (this.state.cart.id) {
-      manageCart = (
-        <li className="cart-dd-item" onClick={this._getCartIndex}>
-          Manage Cart
-        </li>
-      );
+      // manageCart = (
+      //   <li className="cart-dd-item" onClick={this._getCartIndex}>
+      //     Manage Cart
+      //   </li>
+      // );
       clearCart = (
         <li className="cart-dd-item" onClick={this._clearCart}>
           Clear Cart
         </li>
       );
     }
+    var cartIndex;
+    // var cartIndex = (
+    //   <li className="cart-dd-item" onClick={this._getOrderIndex}>
+    //     View All Orders
+    //   </li>
+    // );
     var forDropdown = (
       <ul className="shopping-cart-dropdown">
         {manageCart}
         {clearCart}
-        <li className="cart-dd-item" onClick={this._getOrderIndex}>
-          View All Orders
-        </li>
+        {cartIndex}
       </ul>
     );
     return (

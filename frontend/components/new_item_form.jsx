@@ -45,25 +45,30 @@ var NewItemForm = React.createClass({
         <ImageUpload passUrlToParent={this._passUpImageUrl}
           defaultURL={this.state.product_pic_url} formType="item" />
 
-        <label>Title:
-          <input id="title" type="text" valueLink={this.linkState("title")} />
-        </label>
-        <br />
+        <div className="input">
 
-        <label>Description:
-          <textarea id="description"
-            valueLink={this.linkState("description")}
-            onFocus={this._setEmpty}></textarea>
-        </label>
-        <br />
+          <div className="input-data">
+            <label>Title:
+              <input id="title" type="text" valueLink={this.linkState("title")} />
+            </label>
+            <br />
 
-        <label>Price:
-          <input id="price" type="number" step=".01" valueLink={this.linkState("price")} />
-        </label>
-        <br />
+            <label>Price:
+              <input id="price" type="number" step=".01" valueLink={this.linkState("price")} />
+            </label>
+            <br />
+            
+            <label>Description:
+              <textarea id="description"
+                valueLink={this.linkState("description")}
+                onFocus={this._setEmpty}></textarea>
+            </label>
+            <br />
 
-        <button onClick={this._submitItem}>Create Product</button>
+          </div>
 
+          <button onClick={this._submitItem} className="create-button">Create Product</button>
+        </div>
       </div>
     );
   }

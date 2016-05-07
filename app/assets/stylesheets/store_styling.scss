@@ -69,15 +69,20 @@
       box-shadow: 3px 3px 7px #cdc;
     }
   }
-  .input-data {
-   margin: 120px auto 40px auto;
-   float: right;
-   textarea {
-     position: absolute;
-     margin: 0;
-   }
-  }
-  .create-button {
-   float: right;
+  .input {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    margin: 100px auto 40px 60px;
+    .input-data {
+     float: right;
+     textarea {
+       position: absolute;
+       margin: 0;
+     }
+    }
+    .create-button {
+     align-self: flex-end;
+    }
   }
  }
