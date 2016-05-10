@@ -19,8 +19,19 @@ var ItemRequestButton = React.createClass({
     };
   },
 
-  setOrdered: function(itemRequest) {
-    this.setState({ordered: itemRequest.quantity})
+  componentDidMount: function() {
+    this.listenerToken = OrderStore.addListener(this.setOrdered);
+  },
+
+  setOrdered: function() {
+    var quantite = 0;
+    var id = this.props.itemId;
+    OrderStore.getCurrentOrder().itemRequests.forEach(function(itemRequest) {
+      if (itemRequest.item_id === id) {
+        quantite = itemRequest.quantity;
+      }
+    });
+    this.setState({ordered: quantite});
   },
 
   _requestItem: function(e) {
@@ -32,19 +43,21 @@ var ItemRequestButton = React.createClass({
       ItemRequestActions.addItemRequest(
         currentOrder.id,
         itemId,
-        1,
-        this.setOrdered
+        1
       );
     } else {
       OrderActions.newOrder(function(freshOrder) {
         ItemRequestActions.addItemRequest(
           freshOrder.id,
           itemId,
-          1,
-          this.setOrdered
+          1
         );
       }.bind(this));
     }
+  },
+
+  componentWillUnmount: function() {
+    this.listenerToken.remove();
   },
 
   _hovered: function() {

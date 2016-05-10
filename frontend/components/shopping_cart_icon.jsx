@@ -79,11 +79,13 @@ var ShoppingCartIcon = React.createClass({
     //     View All Orders
     //   </li>
     // );
+    var cartTotal = "Order total: $" + OrderStore.getCurrentOrderTotal().toFixed(2);
     var forDropdown = (
       <ul className="shopping-cart-dropdown">
         {manageCart}
         {clearCart}
         {cartIndex}
+        {cartTotal}
       </ul>
     );
     return (

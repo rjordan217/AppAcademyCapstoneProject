@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Slider = require('react-slick');
 
 var CAROUSEL_PICS = [];
 for(var i = 0; i < 3; i++) {
@@ -27,35 +28,39 @@ developing their brains!</p>
 
 var ImageCarousel = React.createClass({
 
-  getInitialState: function() {
-    return {
-      carouselIndex: 0
+  render: function () {
+    var settings = {
+      dots: true,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
     };
-  },
-
-  changeIndex: function() {
-    this.setState({carouselIndex: (this.state.carouselIndex + 1) % 3});
-  },
-
-  componentDidMount: function() {
-    this.intervalToken = setInterval(this.changeIndex, 5000);
-  },
-
-  componentWillUnmount: function() {
-    clearInterval(this.intervalToken);
-  },
-
-  render: function() {
-    var idx = this.state.carouselIndex;
     return (
       <div className="image-carousel">
-        {CAROUSEL_PICS[idx]}
-        {CAROUSEL_HEADERS[idx]}
-        {CAROUSEL_TEXTS[idx]}
+        <Slider {...settings}>
+          <div>
+            <div className="carousel-pic">{CAROUSEL_PICS[0]}</div>
+            {CAROUSEL_HEADERS[0]}
+            {CAROUSEL_TEXTS[0]}
+          </div>
+          <div>
+            <div className="carousel-pic">{CAROUSEL_PICS[1]}</div>
+            {CAROUSEL_HEADERS[1]}
+            {CAROUSEL_TEXTS[1]}
+          </div>
+          <div>
+            <div className="carousel-pic">{CAROUSEL_PICS[2]}</div>
+            {CAROUSEL_HEADERS[2]}
+            {CAROUSEL_TEXTS[2]}
+          </div>
+        </Slider>
       </div>
     );
   }
-
 });
 
 module.exports = ImageCarousel;

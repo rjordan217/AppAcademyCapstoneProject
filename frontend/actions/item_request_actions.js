@@ -2,13 +2,13 @@ var ItemRequestApiUtil = require('../util/item_request_api_util');
 
 var ItemRequestActions = {
 
-  addItemRequest: function(orderId, itemId, quantity, callback) {
+  addItemRequest: function(orderId, itemId, quantity) {
     var itemRequestParams = {
       order_id: orderId,
       item_id: itemId,
       quantity: quantity
     };
-    ItemRequestApiUtil.create(itemRequestParams, callback);
+    ItemRequestApiUtil.create(itemRequestParams);
   },
 
   removeItemRequest: function(itemRequestId, callback) {

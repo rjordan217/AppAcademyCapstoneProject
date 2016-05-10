@@ -42,9 +42,7 @@ function removeOrder(order) {
 }
 
 function addItemRequest(itemRequest) {
-  if (_currentOrder.itemRequests) {
-    _currentOrder.itemRequests.push(itemRequest);
-  }
+  _currentOrder.itemRequests.push(itemRequest);
 }
 
 function removeItemRequest(itemRequest) {
@@ -66,6 +64,14 @@ OrderStore.allErrors = function() {
 
 OrderStore.getCurrentOrder = function() {
   return Object.assign({}, _currentOrder);
+};
+
+OrderStore.getCurrentOrderTotal = function() {
+  var total = 0;
+  _currentOrder.itemRequests.forEach(function(itemRequest) {
+    total += itemRequest.price;
+  });
+  return total;
 };
 
 OrderStore.allOrders = function() {

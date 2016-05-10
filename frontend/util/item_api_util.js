@@ -12,6 +12,16 @@ var ItemApiUtil = {
       });
   },
 
+  fetchItemsByOrder: function(orderId) {
+    $.ajax({
+        method: 'GET',
+        url: '/api/order/' + orderId + '/items',
+        success: function(items) {
+          ServerActions.setItems(items);
+        }
+      });
+  },
+
   getItemById: function(itemId) {
     $.ajax({
         method: 'GET',

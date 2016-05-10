@@ -152,6 +152,7 @@ body {
  .image-carousel {
    background-color: #000;
    width: 100%;
+   margin-bottom: 60px;
  }
 
  .image-carousel * {
@@ -160,6 +161,7 @@ body {
 
  .image-carousel img {
    max-width: 80vw;
+   background-color: black;
    height: 500px;
    width: auto;
    margin: auto;
@@ -174,6 +176,12 @@ body {
    padding: 10px;
    line-height: 150%;
    text-indent: 3em;
+   margin-bottom: 0;
+ }
+
+ .carousel-pic {
+   width: 100%;
+   background-color: black;
  }
 
 /*  NavBar styling

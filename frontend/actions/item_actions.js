@@ -7,6 +7,10 @@ var ItemActions = {
     ItemApiUtil.fetchItems(storeId);
   },
 
+  fetchItemsByOrder: function(orderId) {
+    ItemApiUtil.fetchItemsByOrder(orderId);
+  },
+
   fetchItemDetail: function(item_id) {
     ItemApiUtil.getItemById(item_id);
   },

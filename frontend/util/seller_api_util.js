@@ -16,7 +16,7 @@ var SellerApiUtil = {
         method: 'GET',
         url: '/api/stores/' + sellerId,
         success: function(store) {
-          ServerActions.addSeller(store);
+          ServerActions.receiveSeller(store);
         }
       });
   },

@@ -14,12 +14,14 @@ var ItemsIndex = React.createClass({
   getInitialState: function() {
     var associatedStore = (this.props.fetchedBySearch ?
       null : SellerStore.getSellerById(this.props.params.store_id));
+    var items = (this.props.fetchedByOrder ? null : ItemStore.all());
     return {
       associatedStore: associatedStore,
-      items: ItemStore.all(),
+      items: items,
       createItemOpen: false
     };
   },
+
   updateItems: function() {
     this.setState({items: ItemStore.all()})
   },
@@ -27,10 +29,14 @@ var ItemsIndex = React.createClass({
   componentDidMount: function() {
     this.itemListenerToken = ItemStore.addListener(this.updateItems);
     if (!this.props.fetchedBySearch) {
-      ItemActions.fetchItems(this.props.params.store_id);
+      if(this.props.fetchedByOrder !== undefined) {
+        ItemActions.fetchItemsByOrder(this.props.fetchedByOrder);
+      } else {
+        ItemActions.fetchItems(this.props.params.store_id);
+      }
     }
   },
-  
+
   componentWillUnmount: function() {
     this.itemListenerToken.remove();
   },

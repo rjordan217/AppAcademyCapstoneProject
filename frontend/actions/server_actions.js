@@ -28,9 +28,15 @@ var ServerActions = {
   },
   addSeller: function(seller) {
     Dispatcher.dispatch({
-      actionType: SellerConstants.STORE_DETAILS_FETCHED,
+      actionType: SellerConstants.STORE_ADDED,
       seller: seller
     })
+  },
+  receiveSeller: function(seller) {
+    Dispatcher.dispatch({
+      actionType: SellerConstants.STORE_DETAILS_FETCHED,
+      seller: seller
+    });
   },
   removeSeller: function (seller) {
     Dispatcher.dispatch({

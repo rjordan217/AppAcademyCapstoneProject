@@ -57,6 +57,10 @@ SellerStore.__onDispatch = function(payload) {
       addSeller(payload.seller);
       SellerStore.__emitChange();
       break;
+    case SellerConstants.STORE_ADDED:
+      addSeller(payload.seller);
+      SellerStore.__emitChange();
+      break;
     case SellerConstants.STORE_DESTROYED:
       removeSeller(payload.seller);
       SellerStore.__emitChange();

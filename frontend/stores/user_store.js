@@ -48,7 +48,7 @@ UserStore.__onDispatch = function(payload) {
       resetErrors([]);
       UserStore.__emitChange();
       break;
-    case SellerConstants.STORE_DETAILS_FETCHED:
+    case SellerConstants.STORE_ADDED:
       updateUserStores(payload.seller.id);
       UserStore.__emitChange();
       break;

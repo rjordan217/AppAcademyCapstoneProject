@@ -9,7 +9,6 @@ var ItemRequestApiUtil = {
         data: {item_request: itemRequestParams},
         success: function(itemRequest) {
           ServerActions.addItemRequest(itemRequest);
-          successCallback(itemRequest);
         }
       });
   },
