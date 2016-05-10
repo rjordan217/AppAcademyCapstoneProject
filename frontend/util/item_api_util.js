@@ -15,7 +15,7 @@ var ItemApiUtil = {
   fetchItemsByOrder: function(orderId) {
     $.ajax({
         method: 'GET',
-        url: '/api/order/' + orderId + '/items',
+        url: '/api/orders/' + orderId + '/items',
         success: function(items) {
           ServerActions.setItems(items);
         }
