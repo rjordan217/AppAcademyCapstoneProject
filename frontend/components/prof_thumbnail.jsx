@@ -21,7 +21,12 @@ var ProfThumbnail = React.createClass({
 
   deleteAccount: function(e) {
     e.preventDefault();
-    UserActions.destroy(function() { HashHistory.push('/'); });
+    var ensured = confirm("Are you sure you want to delete this account?");
+    if (ensured) {
+      UserActions.destroy(function() {
+        HashHistory.push('/');
+      });
+    }
   },
 
   render: function() {

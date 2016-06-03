@@ -29,6 +29,12 @@ var StoreDetail = React.createClass({
     if (store === undefined) {
       content = <div><p>Sorry, the store you requested does not exist.</p></div>;
     } else {
+
+      var picUrl = store.main_pic_url;
+      if (!picUrl.match("/w_348,c_scale")) {
+        store.main_pic_url = picUrl.replace("/image/upload", "/image/upload/w_348,c_scale");
+      }
+
       content = (
         <div className="primary-content">
           <div className="store-detail">

@@ -63,12 +63,9 @@ var UserApiUtil = { //TODO: Fix error handling
       method: 'DELETE',
       url: '/api/user',
       success: function(user) {
-        if(user.errors.length === 0) {
-          ServerActions.setCurrentUser(user);
-          callback();
-        } else {
-          ServerActions.setUserErrors(user.errors);
-        }
+        ServerActions.setUserErrors(user.errors);
+        ServerActions.setCurrentUser(user);
+        callback();
       }
     });
   }

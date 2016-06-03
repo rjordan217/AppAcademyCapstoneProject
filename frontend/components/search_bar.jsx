@@ -44,8 +44,7 @@ var SearchBar = React.createClass({
           onClick={this._submitSearch}
           disabled={this.state.inProgress}
           onKeyDown={this._submitIfEnter}
-          >{this.state.inProgress ? "Searching..." : "Search"}
-        </button>
+          ></button>
       </div>
     );
   }

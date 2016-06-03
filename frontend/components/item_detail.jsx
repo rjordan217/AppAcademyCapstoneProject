@@ -1,5 +1,6 @@
 var React = require('react'),
     ItemStore = require('../stores/item_store'),
+    ItemMiniOrder = require('./item_mini_order'),
     ItemActions = require('../actions/item_actions');
 
 
@@ -29,8 +30,10 @@ var ItemDetail = React.createClass({
       content = (
         <div className="item-detail">
           <img src={item.product_pic_url} />
-          <h2>{item.title}</h2>
-          <h3>${item.price.toFixed(2)}</h3>
+          <div className="item-data">
+            <h2>{item.title}</h2>
+            <ItemMiniOrder itemData={{id: item.id, price: item.price}} />
+          </div>
           <p>{item.description}</p>
           <p>Added {fecha.toLocaleDateString()}</p>
         </div>

@@ -14,7 +14,18 @@ var ItemsIndex = React.createClass({
   getInitialState: function() {
     var associatedStore = (this.props.fetchedBySearch ?
       null : SellerStore.getSellerById(this.props.params.store_id));
-    var items = (this.props.fetchedByOrder ? null : ItemStore.all());
+    var items;
+    if(this.props.fetchedByOrder) {
+      items = null;
+    } else {
+      items = ItemStore.all();
+      items.forEach(function(item) {
+        var picUrl = item.product_pic_url;
+        if (!picUrl.match("/w_300,c_scale")) {
+          item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+        }
+      });
+    }
     return {
       associatedStore: associatedStore,
       items: items,
@@ -23,7 +34,19 @@ var ItemsIndex = React.createClass({
   },
 
   updateItems: function() {
-    this.setState({items: ItemStore.all()})
+    var items;
+    if(this.props.fetchedByOrder) {
+      items = null;
+    } else {
+      items = ItemStore.all();
+      items.forEach(function(item) {
+        var picUrl = item.product_pic_url;
+        if (!picUrl.match("/w_300,c_scale")) {
+          item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+        }
+      });
+    }
+    this.setState({items: items})
   },
 
   componentDidMount: function() {
@@ -37,12 +60,38 @@ var ItemsIndex = React.createClass({
     }
   },
 
+  componentWillReceiveProps(nextProps) {
+    var sortedItems;
+    switch (nextProps.filteredBy) {
+      case "Most Favorited":
+        sortedItems = this.state.items.sort(this._compareFavs.bind(this,1));
+        this.setState({ items: sortedItems });
+        break;
+      case "Least Favorited":
+        sortedItems = this.state.items.sort(this._compareFavs.bind(this,-1));
+        this.setState({items: sortedItems});
+        break;
+    }
+  },
+
   componentWillUnmount: function() {
     this.itemListenerToken.remove();
   },
 
   _startNewItem: function() {
     this.setState({createItemOpen: true})
+  },
+
+  _compareFavs: function(type, item1, item2) {
+    favs1 = item1.favorites.length;
+    favs2 = item2.favorites.length;
+    if (favs1 < favs2) {
+      return type * 1;
+    } else if (favs1 === favs2) {
+      return 0;
+    } else {
+        return type * -1
+    }
   },
 
   closeModal: function() {

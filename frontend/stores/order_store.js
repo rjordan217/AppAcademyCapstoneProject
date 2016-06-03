@@ -42,7 +42,15 @@ function removeOrder(order) {
 }
 
 function addItemRequest(itemRequest) {
-  _currentOrder.itemRequests.push(itemRequest);
+  var idxToReset = -1;
+  _currentOrder.itemRequests.forEach(function(prevItemReq, idx) {
+    if(itemRequest.id === prevItemReq.id) idxToReset = idx;
+  });
+  if (idxToReset >= 0) {
+    _currentOrder.itemRequests[idxToReset] = itemRequest;
+  } else {
+    _currentOrder.itemRequests.push(itemRequest);
+  }
 }
 
 function removeItemRequest(itemRequest) {
@@ -64,6 +72,14 @@ OrderStore.allErrors = function() {
 
 OrderStore.getCurrentOrder = function() {
   return Object.assign({}, _currentOrder);
+};
+
+OrderStore.currentOrderSize = function() {
+  var count = 0;
+  _currentOrder.itemRequests.forEach(function(itemReq) {
+    count += itemReq.quantity;
+  });
+  return count;
 };
 
 OrderStore.getCurrentOrderTotal = function() {

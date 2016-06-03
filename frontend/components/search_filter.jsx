@@ -48,7 +48,7 @@ var SearchFilter = React.createClass({
             }.bind(this))}
           </ul>
         </div>
-        <button onClick={HashHistory.goBack}>Back</button>
+        <button onClick={HashHistory.goBack}>← Back</button>
       </div>
     );
   }

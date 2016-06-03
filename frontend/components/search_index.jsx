@@ -28,7 +28,6 @@ var SearchIndex = React.createClass({
 
   switchFilter: function(newFilter) {
     this.setState({searchFilter: newFilter});
-    alert("Search filters for favorites and taggings have not been implemented yet!");
   },
 
   render: function() {
@@ -36,10 +35,12 @@ var SearchIndex = React.createClass({
 
     switch (this.state.searchMode) {
       case "Show Stores":
-        content = <StoresIndex fetchedBySearch={true} />;
+        content = <StoresIndex fetchedBySearch={true}
+          filteredBy={this.state.searchFilter} />;
         break;
       case "Show Items":
-        content = <ItemsIndex fetchedBySearch={true} />;
+        content = <ItemsIndex fetchedBySearch={true}
+          filteredBy={this.state.searchFilter} />;
         break;
     }
 

@@ -29,7 +29,7 @@ var ItemIndexElement = React.createClass({
     var item = this.props.item;
     if (this.state.currentUser.username) {
       var buttons = (
-        <div className="item-buttons">
+        <div className="index-buttons item-buttons">
           <FavoriteButton favorites={item.favorites}
             favoritable={{type: "Item", id: item.id}}
             itemName={item.title} />
@@ -42,8 +42,10 @@ var ItemIndexElement = React.createClass({
         onClick={this._getDetail}>
         {buttons}
         <img src={item.product_pic_url} />
-        <h3>{item.title}</h3>
-        <p>${item.price.toFixed(2)}</p>
+        <div className="item-data">
+          <p>{item.title}</p>
+          <p>${item.price.toFixed(2)}</p>
+        </div>
       </div>
     );
   }

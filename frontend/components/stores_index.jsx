@@ -21,7 +21,24 @@ var StoresIndex = React.createClass({
   },
 
   _onStoresUpdate: function () {
-    this.setState({stores: SellerStore.all()})
+    var vendedores = SellerStore.all();
+    vendedores.forEach(function(store) {
+      var picUrl = store.main_pic_url;
+      if (!picUrl.match("/w_300,c_scale")) {
+        store.main_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+      }
+
+      var itemPicsUrls = store.featured_pics;
+      for(var idx = 0; idx < itemPicsUrls.length; idx++) {
+        if(!itemPicsUrls[idx].match("/w_100,c_scale")) {
+          store.featured_pics[idx] = itemPicsUrls[idx].replace(
+            "/image/upload",
+            "/image/upload/w_100,c_scale"
+          );
+        }
+      }
+    });
+    this.setState({stores: vendedores})
   },
 
   componentDidMount: function() {
@@ -31,12 +48,38 @@ var StoresIndex = React.createClass({
     }
   },
 
+  componentWillReceiveProps(nextProps) {
+    var sortedStores;
+    switch (nextProps.filteredBy) {
+      case "Most Favorited":
+        sortedStores = this.state.stores.sort(this._compareFavs.bind(this,1));
+        this.setState({ stores: sortedStores });
+        break;
+      case "Least Favorited":
+        sortedStores = this.state.stores.sort(this._compareFavs.bind(this,-1));
+        this.setState({stores: sortedStores});
+        break;
+    }
+  },
+
   componentWillUnmount: function() {
     this.updateStoresToken.remove();
   },
 
   _startNewStore: function() {
-    this.setState({createStoreOpen: true})
+    this.setState({createStoreOpen: true});
+  },
+
+  _compareFavs: function(type, store1, store2) {
+    favs1 = store1.favorites.length;
+    favs2 = store2.favorites.length;
+    if (favs1 < favs2) {
+      return type * 1;
+    } else if (favs1 === favs2) {
+      return 0;
+    } else {
+        return type * -1
+    }
   },
 
   closeModal: function() {

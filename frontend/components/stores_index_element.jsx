@@ -28,21 +28,34 @@ var StoresIndexElement = React.createClass({
 
   render: function() {
     var store = this.props.store;
+    var featuredPics;
+    if (store.featured_pics) featuredPics = store.featured_pics.map(
+      function(pic, idx) {
+        return <img key={idx} src={pic} />;
+      }
+    );
     return (
       <div className="store-index-el liftable"
         onClick={this._clickedForDetail}
         onMouseEnter={this._setHovered}
         onMouseLeave={this._resetHovered}>
-        <img src={store.main_pic_url} />
+        <div className="store-images">
+          <img src={store.main_pic_url} />
+          <div className="store-featured">
+            {featuredPics}
+          </div>
+        </div>
         <h3>{store.store_name}</h3>
-        {this.state.currentUser.username ? <FavoriteButton favorites={store.favorites}
-          favoritable={{type: "Store", id: store.id}}
-          storeName={store.store_name}
-          showAll={this.state.hovered} /> : null}
+        {this.state.currentUser.username ? <div className="index-buttons">
+          <FavoriteButton favorites={store.favorites}
+            favoritable={{type: "Store", id: store.id}}
+            storeName={store.store_name}
+            showAll={this.state.hovered} />
+          </div> : null}
       </div>
     );
   }
 
 });
-// {store.main_pic_url}
+
 module.exports = StoresIndexElement;

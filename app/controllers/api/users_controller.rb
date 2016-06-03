@@ -16,8 +16,12 @@ class Api::UsersController < ApplicationController
     @user = current_user
     errs = []
     unless @user.nil?
-      @user.destroy
-      errs = @user.errors.full_messages
+      if @user.username != "pet_lover_demo"
+        @user.destroy
+        errs = @user.errors.full_messages
+      else
+        errs << "Cannot delete demo account!"
+      end
       logout! unless errs.empty?
     end
     @user = User.new

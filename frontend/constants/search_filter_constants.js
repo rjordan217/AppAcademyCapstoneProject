@@ -6,8 +6,6 @@ module.exports = {
   FILTERS: [
     "Most Favorited",
     "Least Favorited",
-    "Most Tagged",
-    "Least Tagged",
     "No Filter"
   ]
 };
