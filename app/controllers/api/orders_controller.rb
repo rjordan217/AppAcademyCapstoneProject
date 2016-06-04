@@ -48,7 +48,11 @@ class Api::OrdersController < ApplicationController
   end
 
   def get_order
-    @order = Order.find(params[:id])
+    if params[:id]
+      @order = Order.find(params[:id])
+    else
+      @order = Order.where(user_id: current_user.id).order(updated_at: :desc).first
+    end
   end
 
   def proper_user

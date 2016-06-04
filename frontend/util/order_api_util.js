@@ -1,13 +1,24 @@
-var ServerActions = require('../actions/server_actions');
+var ServerActions = require('../actions/server_actions'),
+    omit = require('object.omit');
 
 var OrderApiUtil = {
-  fetchOrderById: function(orderId, successCallback) {
+  fetchOrderWithItemsById: function(orderId, successCallback) {
     $.ajax({
         method: 'GET',
         url: '/api/orders/' + orderId,
         success: function(order) {
+          ServerActions.setCurrentOrder(omit(order, 'items'));
+          ServerActions.setItems(order.items);
+        }
+      });
+  },
+
+  fetchCurrentOrder: function() {
+    $.ajax({
+        method: 'GET',
+        url: '/api/cart/current',
+        success: function(order) {
           ServerActions.setCurrentOrder(order);
-          successCallback();
         }
       });
   },

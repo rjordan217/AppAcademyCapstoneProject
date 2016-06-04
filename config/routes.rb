@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :create, :show, :update, :destroy]
     resources :favorites, only: [:create, :destroy]
     resources :orders, only: [:create, :show, :update, :destroy]
+    get 'cart/current', to: 'orders#show'
     resources :item_requests, only: [:create, :destroy]
 
     namespace :search do

@@ -2,9 +2,11 @@ var React = require('react'),
     OrderActions = require('../actions/order_actions'),
     HashHistory = require('react-router').hashHistory,
     Dropdown = require('./dropdown'),
+    CurrentUserStateMixin = require('../mixins/current_user_state'),
     OrderStore = require('../stores/order_store');
 
 var ShoppingCartIcon = React.createClass({
+  mixins: [ CurrentUserStateMixin ],
 
   getInitialState: function() {
     return {
@@ -15,7 +17,7 @@ var ShoppingCartIcon = React.createClass({
 
   componentDidMount: function() {
     this.listenerToken = OrderStore.addListener(this.updateCart);
-    //TODO: have fetch request?
+    OrderActions.fetchCurrentOrder();
   },
 
   updateCart: function() {
@@ -36,7 +38,7 @@ var ShoppingCartIcon = React.createClass({
 
   _getCartIndex: function(e) {
     e.preventDefault();
-    HashHistory.push('/cart');
+    HashHistory.push('/cart/' + this.state.cart.id);
   },
 
   _getOrderIndex: function(e) {
@@ -62,11 +64,11 @@ var ShoppingCartIcon = React.createClass({
     var manageCart;
     var clearCart;
     if (this.state.cart.id) {
-      // manageCart = (
-      //   <li className="cart-dd-item" onClick={this._getCartIndex}>
-      //     Manage Cart
-      //   </li>
-      // );
+      manageCart = (
+        <li className="cart-dd-item" onClick={this._getCartIndex}>
+          Manage Cart
+        </li>
+      );
       clearCart = (
         <li className="cart-dd-item" onClick={this._clearCart}>
           Clear Cart

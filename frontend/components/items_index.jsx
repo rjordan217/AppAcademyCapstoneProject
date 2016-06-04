@@ -2,6 +2,7 @@ var React = require('react'),
     ItemIndexElement = require('./item_index_element.jsx'),
     ItemStore = require('../stores/item_store'),
     SellerStore = require('../stores/seller_store'),
+    OrderActions = require('../actions/order_actions'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
     Modal = require('react-modal'),
     NewItemForm = require('./new_item_form'),
@@ -12,7 +13,7 @@ var ItemsIndex = React.createClass({
   mixins: [CurrentUserStateMixin],
 
   getInitialState: function() {
-    var associatedStore = (this.props.fetchedBySearch ?
+    var associatedStore = (this.props.fetchedBySearch || this.props.fetchedByOrder ?
       null : SellerStore.getSellerById(this.props.params.store_id));
     var items;
     if(this.props.fetchedByOrder) {
@@ -34,26 +35,21 @@ var ItemsIndex = React.createClass({
   },
 
   updateItems: function() {
-    var items;
-    if(this.props.fetchedByOrder) {
-      items = null;
-    } else {
-      items = ItemStore.all();
-      items.forEach(function(item) {
-        var picUrl = item.product_pic_url;
-        if (!picUrl.match("/w_300,c_scale")) {
-          item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
-        }
-      });
-    }
-    this.setState({items: items})
+    var items = ItemStore.all();
+    items.forEach(function(item) {
+      var picUrl = item.product_pic_url;
+      if (!picUrl.match("/w_300,c_scale")) {
+        item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+      }
+    });
+    this.setState({items: items});
   },
 
   componentDidMount: function() {
     this.itemListenerToken = ItemStore.addListener(this.updateItems);
     if (!this.props.fetchedBySearch) {
       if(this.props.fetchedByOrder !== undefined) {
-        ItemActions.fetchItemsByOrder(this.props.fetchedByOrder);
+        OrderActions.getOrderWithItemsById(this.props.fetchedByOrder);
       } else {
         ItemActions.fetchItems(this.props.params.store_id);
       }
@@ -101,29 +97,31 @@ var ItemsIndex = React.createClass({
   },
 
   render: function() {
-
-    var content = this.state.items.map(function(item) {
-      return <ItemIndexElement location={this.props.location} item={item} key={item.id} />;
-    }.bind(this));
-    var currentUser = this.state.currentUser;
-    if (currentUser.username) {
-      var stores = this.state.currentUser.stores.map(function(store) {
-        return store.id;
-      });
-      if (this.state.associatedStore && stores.includes(this.state.associatedStore.id)) {
-        content.push(
-          <div className="item-index-el" key={-1}>
-            <h3>Add Item</h3>
-            <button onClick={this._startNewItem}>+</button>
-            <Modal
-              isOpen={this.state.createItemOpen}
-              onRequestClose={this.closeModal}
-              style={createModalStyle}>
-              <NewItemForm store={this.state.associatedStore}
-                closeModalFun={this.closeModal} />
-            </Modal>
-          </div>
-        );
+    var content = [];
+    if(this.state.items) {
+      content = this.state.items.map(function(item) {
+        return <ItemIndexElement location={this.props.location} item={item} key={item.id} />;
+      }.bind(this));
+      var currentUser = this.state.currentUser;
+      if (currentUser.username) {
+        var stores = this.state.currentUser.stores.map(function(store) {
+          return store.id;
+        });
+        if (this.state.associatedStore && stores.includes(this.state.associatedStore.id)) {
+          content.push(
+            <div className="item-index-el" key={-1}>
+              <h3>Add Item</h3>
+              <button onClick={this._startNewItem}>+</button>
+              <Modal
+                isOpen={this.state.createItemOpen}
+                onRequestClose={this.closeModal}
+                style={createModalStyle}>
+                <NewItemForm store={this.state.associatedStore}
+                  closeModalFun={this.closeModal} />
+              </Modal>
+            </div>
+          );
+        }
       }
     }
     if (content.length === 0 && this.props.fetchedBySearch) {
@@ -132,7 +130,6 @@ var ItemsIndex = React.createClass({
     return (
       <div id='items-index'>
         {content}
-
       </div>
     );
   }

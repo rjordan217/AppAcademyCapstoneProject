@@ -7,8 +7,12 @@ var OrderActions = {
     OrderApiUtil.create(callback);
   },
 
-  getOrderById: function(orderId, callback) {
-    OrderApiUtil.fetchOrderById(orderId, callback);
+  getOrderWithItemsById: function(orderId, callback) {
+    OrderApiUtil.fetchOrderWithItemsById(orderId, callback);
+  },
+
+  fetchCurrentOrder: function() {
+    OrderApiUtil.fetchCurrentOrder();
   },
 
   placeOrder: function(orderId, callback) {

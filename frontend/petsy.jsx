@@ -42,7 +42,7 @@ var routes = (
     <Route path='/orders' component={OrdersIndex}>
       <Route path=':order_id' component={OrderShow} />
     </Route>
-    <Route path='/cart' component={OrderShow} />
+    <Route path='/cart/:cart_id' component={OrderShow} />
     <Route path='search/:encoded_search_params' component={SearchIndex} />
   </Route>
 );

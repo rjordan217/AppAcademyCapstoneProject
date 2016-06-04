@@ -305,13 +305,13 @@ input[type="search"]::-webkit-search-cancel-button {
  *
  *
  */
-
+/*TODO: Fix button styling for splash page, have item request prompt user login */
 button {
-  background: #D1DCD1;
-  background: -webkit-linear-gradient(#D1DCD1, #ddd);
-  background: -o-linear-gradient(#D1DCD1, #ddd);
-  background: -moz-linear-gradient(#D1DCD1, #ddd);
-  background: linear-gradient(#D1DCD1, #ddd);
+  background: #3d3;
+  background: -webkit-linear-gradient(#2b2, #3d3);
+  background: -o-linear-gradient(#2b2, #3d3);
+  background: -moz-linear-gradient(#2b2, #3d3);
+  background: linear-gradient(#2b2, #3d3);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -524,14 +524,43 @@ button {
 .index-buttons button {
   border-radius: 0;
   border-bottom-left-radius: 5px;
+  background: #D1DCD1;
+  background: -webkit-linear-gradient(#D1DCD1, #ddd);
+  background: -o-linear-gradient(#D1DCD1, #ddd);
+  background: -moz-linear-gradient(#D1DCD1, #ddd);
+  background: linear-gradient(#D1DCD1, #ddd);
 }
 
 .index-buttons {
   position: absolute;
 }
 
-.favorite-button button:hover {
+.order-show {
+  display: flex;
+}
 
+.order-show #items-index {
+  width: 70vw;
+  flex-grow: 0;
+}
+
+.order-details {
+  position: fixed;
+  z-index: 2;
+  padding: 20px;
+  box-shadow: -5px 0 3px #ded;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.quant {
+  text-align: center;
+}
+
+.det-price {
+  text-align: right;
 }
 
 footer {
