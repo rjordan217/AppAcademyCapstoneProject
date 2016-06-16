@@ -1,6 +1,7 @@
 var React = require('react'),
     OrderStore = require('../stores/order_store'),
     OrderActions = require('../actions/order_actions'),
+    UserStore = require('../stores/user_store'),
     ItemRequestActions = require('../actions/item_request_actions');
 
 var ItemMiniOrder = React.createClass({

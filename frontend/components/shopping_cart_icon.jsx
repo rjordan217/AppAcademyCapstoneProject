@@ -3,6 +3,7 @@ var React = require('react'),
     HashHistory = require('react-router').hashHistory,
     Dropdown = require('./dropdown'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
+    UserStore = require('../stores/user_store'),
     OrderStore = require('../stores/order_store');
 
 var ShoppingCartIcon = React.createClass({

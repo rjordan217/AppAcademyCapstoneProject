@@ -2,6 +2,7 @@ var React = require('react'),
     Dropdown = require('./dropdown'),
     ItemRequestActions = require('../actions/item_request_actions'),
     OrderActions = require('../actions/order_actions'),
+    UserStore = require('../stores/user_store'),
     OrderStore = require('../stores/order_store');
 
 var ItemRequestButton = React.createClass({
