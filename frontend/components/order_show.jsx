@@ -1,20 +1,37 @@
 var React = require('react'),
     OrderTable = require('./order_table'),
     OrderStore = require('../stores/order_store'),
-    ItemsIndex = require('./items_index');
+    ItemsIndex = require('./items_index'),
+    HashHistory = require('react-router').hashHistory;
 
 var OrderShow = React.createClass({
 
-  // TODO: Make OrderShow react to cart changes
+  getInitialState: function() {
+    return {
+      empty: !OrderStore.getCurrentOrder().itemRequests.length
+    };
+  },
+
+  componentDidMount: function() {
+    this.orderListener = OrderStore.addListener(this._storeChange);
+  },
+
+  _storeChange: function() {
+    this.setState({empty: !OrderStore.getCurrentOrder().itemRequests.length});
+  },
+
+  componentWillUnmount: function() {
+    this.orderListener.remove();
+  },
 
   render: function() {
-    var subTotal = 0;
-
+    if(this.state.empty) setTimeout(HashHistory.push.bind(HashHistory,"/stores"), 2000);
     return (
       <div className="order-show">
-        <ItemsIndex fetchedByOrder={this.props.params.cart_id} />
+        {this.state.empty ? <div id="items-index"><h3>Shopping cart is empty! Redirecting...</h3></div>
+          : <ItemsIndex fetchedByOrder={this.props.params.cart_id} />}
         <div className="order-details">
-          <OrderTable />
+          <OrderTable empty={this.state.empty} />
         </div>
       </div>
     );

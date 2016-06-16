@@ -61,6 +61,11 @@ var FavoriteButton = React.createClass({
     }
   },
 
+  _promptLogin: function(e) {
+    e.stopPropagation();
+    alert("Please login or register to favorite items.");
+  },
+
   _hovered: function() {
     this.setState({hovered: true});
   },
@@ -73,16 +78,22 @@ var FavoriteButton = React.createClass({
     var text, onClickAction, estilo, total;
     var calcStyle = {
       top: '30px',
-      left: '-65px'
+      left: '-70px'
     };
-    if(this.state.isFavorited) {
-      text = <p className="fav-text" key={1}>Unfavorite {this.props.favoritable.type}</p>;
-      onClickAction = this._unfavoriteObj;
-      estilo = {color: 'red'};
+    if(this.state.currentUser.username) {
+      if(this.state.isFavorited) {
+        text = <p className="fav-text" key={1}>Unfavorite {this.props.favoritable.type}</p>;
+        onClickAction = this._unfavoriteObj;
+        estilo = {color: 'red'};
+      } else {
+        text = <p className="fav-text" key={1}>Favorite {this.props.favoritable.type}</p>;
+        onClickAction = this._favoriteObj;
+        estilo = {color: 'white'};
+      }
     } else {
-      text = <p className="fav-text" key={1}>Favorite {this.props.favoritable.type}</p>;
-      onClickAction = this._favoriteObj;
-      estilo = {color: 'white'};
+      text = <p className="fav-text" key={1}>Login to favorite item.</p>;
+      onClickAction = this._promptLogin;
+      estilo = (this.state.isFavorited ? {color: 'red'} : {color: 'white'});
     }
     total = <p className="fav-text" key={2}>Total favorites: {this.props.favorites.length}</p>;
     return (

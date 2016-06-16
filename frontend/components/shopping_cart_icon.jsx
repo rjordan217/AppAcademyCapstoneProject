@@ -6,18 +6,23 @@ var React = require('react'),
     OrderStore = require('../stores/order_store');
 
 var ShoppingCartIcon = React.createClass({
-  mixins: [ CurrentUserStateMixin ],
 
   getInitialState: function() {
     return {
+      currentUser: UserStore.getCurrentUser(),
       cart: OrderStore.getCurrentOrder(),
       hovered: false
     };
   },
 
   componentDidMount: function() {
-    this.listenerToken = OrderStore.addListener(this.updateCart);
+    this.orderListenerToken = OrderStore.addListener(this.updateCart);
+    this.userListenerToken = UserStore.addListener(this.updateUser);
     OrderActions.fetchCurrentOrder();
+  },
+
+  updateUser: function() {
+    this.setState({currentUser: UserStore.getCurrentUser()});
   },
 
   updateCart: function() {
@@ -25,7 +30,8 @@ var ShoppingCartIcon = React.createClass({
   },
 
   componentWillUnmount: function() {
-    this.listenerToken.remove();
+    this.orderListenerToken.remove();
+    this.userListenerToken.remove();
   },
 
   _hover: function() {

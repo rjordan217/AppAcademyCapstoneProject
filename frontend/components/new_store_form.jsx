@@ -1,12 +1,11 @@
 var React = require('react'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin'),
     CurrentUserStateMixin = require('../mixins/current_user_state'),
     SellerActions = require('../actions/seller_actions'),
     ImageUpload = require('./image_upload');
 
 var NewStoreForm = React.createClass({
 
-  mixins: [ CurrentUserStateMixin, LinkedStateMixin ],
+  mixins: [CurrentUserStateMixin],
 
   getInitialState: function() {
     return {
@@ -32,6 +31,14 @@ var NewStoreForm = React.createClass({
     }
   },
 
+  _updateStoreName: function(e) {
+    this.setState({store_name: e.target.value});
+  },
+
+  _updateDescription: function(e) {
+    this.setState({description: e.target.value});
+  },
+
   render: function() {
 
     return (
@@ -45,13 +52,17 @@ var NewStoreForm = React.createClass({
         <div className="input">
           <div className="input-data">
             <label>Store Name:
-              <input id="store_name" type="text" valueLink={this.linkState("store_name")} />
+              <input id="store_name"
+                type="text"
+                value={this.state.store_name}
+                onChange={this._updateStoreName} />
             </label>
             <br />
 
             <label>Description:</label>
               <textarea id="description"
-                valueLink={this.linkState("description")}
+                value={this.state.description}
+                onChange={this._updateDescription}
                 onFocus={this._setEmpty}></textarea>
 
             <br />

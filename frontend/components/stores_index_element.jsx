@@ -46,12 +46,12 @@ var StoresIndexElement = React.createClass({
           </div>
         </div>
         <h3>{store.store_name}</h3>
-        {this.state.currentUser.username ? <div className="index-buttons">
+        <div className="index-buttons">
           <FavoriteButton favorites={store.favorites}
             favoritable={{type: "Store", id: store.id}}
             storeName={store.store_name}
             showAll={this.state.hovered} />
-          </div> : null}
+        </div>
       </div>
     );
   }

@@ -14,13 +14,21 @@ var ItemRequestButton = React.createClass({
       }
     });
     return {
+      currentUser: UserStore.getCurrentUser(),
       ordered: quantite,
       hovered: false
     };
   },
 
   componentDidMount: function() {
-    this.listenerToken = OrderStore.addListener(this.setOrdered);
+    this.userListenerToken = UserStore.addListener(this.updateUser);
+    this.orderListenerToken = OrderStore.addListener(this.setOrdered);
+  },
+
+  updateUser: function() {
+    this.setState({
+      currentUser: UserStore.getCurrentUser()
+    });
   },
 
   setOrdered: function() {
@@ -34,9 +42,17 @@ var ItemRequestButton = React.createClass({
     this.setState({ordered: quantite});
   },
 
+  _promptLogin: function(e) {
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+
+    alert("Please login or register to build a shopping cart.");
+  },
+
   _requestItem: function(e) {
-    if (e.stopPropagation)    { e.stopPropagation(); }
-    if (e.cancelBubble!=null) { e.cancelBubble = true; }
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+
     var currentOrder = OrderStore.getCurrentOrder();
     var itemId = this.props.itemId;
     if (currentOrder.id !== null) {
@@ -57,7 +73,8 @@ var ItemRequestButton = React.createClass({
   },
 
   componentWillUnmount: function() {
-    this.listenerToken.remove();
+    this.userListenerToken.remove();
+    this.orderListenerToken.remove();
   },
 
   _hovered: function() {
@@ -69,7 +86,15 @@ var ItemRequestButton = React.createClass({
   },
 
   render: function() {
-    var text = <p>{this.state.ordered} total ordered</p>;
+    var text;
+    var clickAction;
+    if(this.state.currentUser.username) {
+      text = <p>{this.state.ordered} total ordered</p>;
+      clickAction = this._requestItem;
+    } else {
+      text = <p>Login to order item.</p>;
+      clickAction = this._promptLogin;
+    }
     var estilo = {
       color: 'gold',
       textShadow: '0 0 2px #000',
@@ -77,14 +102,14 @@ var ItemRequestButton = React.createClass({
     };
     var calcStyle = {
       top: '30px',
-      left: '-65px'
+      left: '-70px'
     };
     return (
       <div className="item-request-button droppable">
         <Dropdown text={text}
           visible={this.state.hovered}
           calcStyle={calcStyle}/>
-        <button onClick={this._requestItem}
+        <button onClick={clickAction}
           onMouseEnter={this._hovered}
           onMouseLeave={this._unhovered}
           style={this.state.ordered ? estilo : null}>+</button>

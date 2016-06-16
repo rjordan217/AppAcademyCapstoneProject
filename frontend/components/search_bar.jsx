@@ -1,5 +1,4 @@
 var React = require('react'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin'),
     InProgressMixin = require('../mixins/in_progress'),
     SellerActions = require('../actions/seller_actions'),
     ItemActions = require('../actions/item_actions'),
@@ -7,7 +6,7 @@ var React = require('react'),
 
 var SearchBar = React.createClass({
 
-  mixins: [LinkedStateMixin, InProgressMixin],
+  mixins: [InProgressMixin],
 
   getInitialState: function() {
     return { searchParams: "Search Petsy..." };
@@ -33,11 +32,16 @@ var SearchBar = React.createClass({
     }
   },
 
+  _updateSearchParams: function(e) {
+    this.setState({searchParams: e.target.value});
+  },
+
   render: function() {
     return (
       <div className="search-bar">
         <input type="search"
-          valueLink={this.linkState("searchParams")}
+          value={this.state.searchParams}
+          onChange={this._updateSearchParams}
           onClick={this._setEmpty}
           onKeyDown={this._submitIfEnter} />
         <button

@@ -1,5 +1,5 @@
 class Favorite < ActiveRecord::Base
-  validates :favoritable_id, uniqueness: { scope: :user_id }
+  validates :favoritable_id, uniqueness: { scope: [:user_id, :favoritable_type] }
 
   belongs_to :user
   validates :user, presence: true

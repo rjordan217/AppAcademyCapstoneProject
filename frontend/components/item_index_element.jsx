@@ -27,16 +27,14 @@ var ItemIndexElement = React.createClass({
 
   render: function() {
     var item = this.props.item;
-    if (this.state.currentUser.username) {
-      var buttons = (
-        <div className="index-buttons item-buttons">
-          <FavoriteButton favorites={item.favorites}
-            favoritable={{type: "Item", id: item.id}}
-            itemName={item.title} />
-          <ItemRequestButton itemId={item.id} />
-        </div>
-      );
-    }
+    var buttons = (
+      <div className="index-buttons item-buttons">
+        <FavoriteButton favorites={item.favorites}
+          favoritable={{type: "Item", id: item.id}} 
+          itemName={item.title} />
+        <ItemRequestButton itemId={item.id} />
+      </div>
+    );
     return (
       <div className="item-index-el liftable"
         onClick={this._getDetail}>

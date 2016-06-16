@@ -7,8 +7,23 @@ var ItemMiniOrder = React.createClass({
 
   getInitialState: function() {
     return {
-      quantity: 1
+      quantity: 1,
+      loggedIn: !!UserStore.getCurrentUser().username
     };
+  },
+
+  componentDidMount: function() {
+    this.userListenerToken = UserStore.addListener(this.updateLogin);
+  },
+
+  componentWillUnmount: function() {
+    this.userListenerToken.remove();
+  },
+
+  updateLogin: function() {
+    this.setState({
+      loggedIn: !!UserStore.getCurrentUser().username
+    });
   },
 
   _requestItem: function(e) {
@@ -31,6 +46,11 @@ var ItemMiniOrder = React.createClass({
     }
   },
 
+  _promptLogin: function(e) {
+    e.preventDefault();
+    alert("Login or register to add items to cart.");
+  },
+
   _updateQuantity: function(e) {
     var val = e.target.value;
     if(val >= 0) this.setState({quantity: val});
@@ -39,6 +59,8 @@ var ItemMiniOrder = React.createClass({
   render: function() {
     var quant = this.state.quantity,
         precio = this.props.itemData.price;
+
+    var clickAction = (this.state.loggedIn ? this._requestItem : this._promptLogin);
     return (
       <div className="mini-order">
         <div>
@@ -48,7 +70,7 @@ var ItemMiniOrder = React.createClass({
           <p>x ${precio.toFixed(2)}</p>
         </div>
         <p>Total Cost for Item{quant > 1 ? 's' : null}: ${ (quant * precio).toFixed(2) }</p>
-        <button onClick={this._requestItem}>Add to Order</button>
+        <button onClick={clickAction}>Add to Order</button>
       </div>
     );
   }

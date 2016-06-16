@@ -1,14 +1,11 @@
-
-
 var React = require('react'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin');
     CurrentUserStateMixin = require('../mixins/current_user_state'),
     UserActions = require('../actions/user_actions'),
     ImageUpload = require('./image_upload'),
     UserStore = require('../stores/user_store');
 
 var AuthForm = React.createClass({
-  mixins: [LinkedStateMixin, CurrentUserStateMixin],
+  mixins: [CurrentUserStateMixin],
 
   getInitialState: function() {
     return {
@@ -66,13 +63,21 @@ var AuthForm = React.createClass({
       idx += 1;
       self.setState({ username: demoUsername.slice(0,idx) });
       if (idx === demoUsername.length) {
-        self.setState({password: '123123'});
+        self.setState({password: 'meowmeow'});
         self._submitLogin({preventDefault: function(){} });
       } else {
         setTimeout(typingCallback, 150);
       }
     }
     typingCallback();
+  },
+
+  _updateUsername: function(e) {
+    this.setState({username: e.target.value})
+  },
+
+  _updatePassword: function(e) {
+    this.setState({password: e.target.value})
   },
 
   render: function() {
@@ -143,12 +148,18 @@ var AuthForm = React.createClass({
           {ErrorGroup}
 
           <label>Username:
-            <input id="username" type="text" valueLink={this.linkState("username")} />
+            <input id="username"
+              type="text"
+              value={this.state.username}
+              onChange={this._updateUsername} />
           </label>
           <br />
 
           <label>Password:
-            <input id="password" type="password" valueLink={this.linkState("password")}/>
+            <input id="password"
+              type="password"
+              value={this.state.password}
+              onChange={this._updatePassword}/>
           </label>
           <br />
         </div>

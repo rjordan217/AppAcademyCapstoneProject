@@ -1,11 +1,8 @@
 var React = require('react'),
     ImageUpload = require('./image_upload'),
-    ItemActions = require('../actions/item_actions'),
-    LinkedStateMixin = require('react-addons-linked-state-mixin');
+    ItemActions = require('../actions/item_actions');
 
 var NewItemForm = React.createClass({
-
-  mixins: [LinkedStateMixin],
 
   getInitialState: function() {
     return {
@@ -34,6 +31,18 @@ var NewItemForm = React.createClass({
     }
   },
 
+  _updateTitle: function(e) {
+    this.setState({title: e.target.value});
+  },
+
+  _updatePrice: function(e) {
+    this.setState({price: e.target.value});
+  },
+
+  _updateDescription: function(e) {
+    this.setState({description: e.target.value});
+  },
+
   render: function() {
 
     return (
@@ -49,18 +58,26 @@ var NewItemForm = React.createClass({
 
           <div className="input-data">
             <label>Title:
-              <input id="title" type="text" valueLink={this.linkState("title")} />
+              <input id="title"
+                type="text"
+                value={this.state.title}
+                onChange={this._updateTitle} />
             </label>
             <br />
 
             <label>Price:
-              <input id="price" type="number" step=".01" valueLink={this.linkState("price")} />
+              <input id="price"
+                type="number"
+                step=".01"
+                value={this.state.price}
+                onChange={this._updatePrice} />
             </label>
             <br />
-            
+
             <label>Description:
               <textarea id="description"
-                valueLink={this.linkState("description")}
+                value={this.state.description}
+                onChange={this._updateDescription}
                 onFocus={this._setEmpty}></textarea>
             </label>
             <br />

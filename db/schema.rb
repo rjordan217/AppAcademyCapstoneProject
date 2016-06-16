@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160504221841) do
   end
 
   add_index "favorites", ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
-  add_index "favorites", ["user_id", "favoritable_id"], name: "index_favorites_on_user_id_and_favoritable_id", unique: true, using: :btree
+  add_index "favorites", ["user_id", "favoritable_id"], name: "index_favorites_on_user_id_and_favoritable_id", using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "item_requests", force: :cascade do |t|

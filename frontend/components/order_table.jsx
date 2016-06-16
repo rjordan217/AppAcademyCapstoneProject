@@ -18,13 +18,19 @@ var OrderTable = React.createClass({
     this.itemReqListener.remove();
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.empty) {
+      this.setState({itemReqs: null});
+    }
+  },
+
   _updateItemReqs: function() {
     this.setState({itemReqs: OrderStore.getCurrentOrder().itemRequests});
   },
 
   generateRows: function() {
+    var subTotal = 0;
     if (this.state.itemReqs) {
-      var subTotal = 0;
       return (
         <tbody>
         {
@@ -47,6 +53,16 @@ var OrderTable = React.createClass({
           </tr>
         </tbody>
       );
+    } else {
+      return (
+        <tbody>
+          <tr>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>${subTotal.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      )
     }
   },
 

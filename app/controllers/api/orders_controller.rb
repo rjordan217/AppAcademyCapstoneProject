@@ -51,7 +51,7 @@ class Api::OrdersController < ApplicationController
     if params[:id]
       @order = Order.find(params[:id])
     else
-      @order = Order.where(user_id: current_user.id).order(updated_at: :desc).first
+      @order = Order.where(user_id: current_user.id).order(updated_at: :desc).first || Order.new
     end
   end
 

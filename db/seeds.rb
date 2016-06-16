@@ -10,7 +10,7 @@
   User.create!(username: "pet_lover_#{i}", password: "123123")
 end
 
-User.create!(username: "pet_lover_demo", password: "123123", profile_pic_url: "http://res.cloudinary.com/petsy/image/upload/v1462347568/uwmwa8ebrha75ef5oacn.jpg")
+User.create!(username: "pet_lover_demo", password: "meowmeow", profile_pic_url: "http://res.cloudinary.com/petsy/image/upload/v1462347568/uwmwa8ebrha75ef5oacn.jpg")
 
 random_pet_types = [
   "Dog ",
@@ -105,12 +105,15 @@ stores_urls = [
   "http://res.cloudinary.com/petsy/image/upload/v1462343403/stores_production/true_7.jpg"
 ]
 
+stores_urls.shuffle!
+num_store_pics = stores_urls.length
+
 50.times do |i|
   Store.create!(
     store_name: "The #{random_pet_types.sample}#{random_store_words.sample} #{i}",
     description: random_store_sentences.sample + random_store_sentences.sample + random_store_sentences.sample,
     user_id: rand(1..40),
-    main_pic_url: stores_urls.sample
+    main_pic_url: stores_urls[i % num_store_pics]
   )
 end
 
@@ -171,7 +174,8 @@ items_urls = [
   "http://res.cloudinary.com/petsy/image/upload/v1462343347/items_production/true_9.jpg"
 ]
 
-
+items_urls.shuffle!
+num_item_pics = items_urls.length
 
 random_pet_toys = [
   "Squeaky Toy",
@@ -194,8 +198,38 @@ random_item_sentences = [
   Item.create!(
     title: random_pet_types.sample + random_pet_toys.sample + " #{i}",
     description: random_item_sentences.sample + random_item_sentences.sample + random_item_sentences.sample,
-    price: Faker::Commerce.price,
+    price: rand(1..15).round(2),
     store_id: rand(1..50),
-    product_pic_url: items_urls.sample
+    product_pic_url: items_urls[i % num_item_pics]
   )
+end
+
+40.times do |i|
+  store_ids = []
+  10.times do
+    store_ids << rand(1..50)
+  end
+  store_ids.uniq!
+
+  store_ids.each do |store_id|
+    Favorite.create!(
+      user_id: i + 1,
+      favoritable_id: store_id,
+      favoritable_type: "Store"
+    )
+  end
+
+  item_ids = []
+  30.times do
+    item_ids << rand(1..500)
+  end
+  item_ids.uniq!
+
+  item_ids.each do |item_id|
+    Favorite.create!(
+      user_id: i + 1,
+      favoritable_id: item_id,
+      favoritable_type: "Item"
+    )
+  end
 end
