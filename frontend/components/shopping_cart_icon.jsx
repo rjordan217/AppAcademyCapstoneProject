@@ -62,11 +62,11 @@ var ShoppingCartIcon = React.createClass({
   render: function() {
     var estilo = {
       backgroundImage: "url('/assets/shopping_cart_icon.png')",
-      backgroundSize: '50px 50px'
+      backgroundSize: '3.125em 3.125em'
     }
     var calcStyle = {
-      top: '48px',
-      left: '-55px'
+      top: '3em',
+      left: '-3.4375em'
     };
     var manageCart;
     var clearCart;

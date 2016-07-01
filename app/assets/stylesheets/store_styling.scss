@@ -2,29 +2,29 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 5px;
+  padding: .3125em;
 }
 
 .store-index-el {
   display: flex;
-  padding: 15px 10px;
+  padding: .9375em .625em;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin: 5px;
+  margin: .3125em;
   cursor: pointer;
   .index-buttons {
-    top: 16px;
-    right: 91px;
+    top: 1em;
+    right: 5.6875em;
   }
 
 }
 
 .store-images {
-  width: 403px;
+  width: 25.1875em;
   display: flex;
   img {
-    border: 1px solid rgba(34, 85, 34, 0.2);
+    border: .0625em solid rgba(34, 85, 34, 0.2);
   }
   > img {
     border-right: 0;
@@ -35,7 +35,7 @@
   img {
     border-top: 0;
     &:first-child {
-      border-top: 1px solid rgba(34, 85, 34, 0.2);
+      border-top: .0625em solid rgba(34, 85, 34, 0.2);
     }
   }
 }
@@ -48,33 +48,33 @@
 
  .store-detail {
    flex-grow: 1;
-   width: 390px;
-   padding: 20px;
+   width: 24.375em;
+   padding: 1.25em;
    box-shadow: 5px 0 3px #ded;
    img {
      margin-left: auto;
      margin-right: auto;
-     width: 348px;
+     width: 21.75em;
      border: 1px solid rgba(34, 85, 34, 0.2);
    }
    h2 {
-     margin: 25px 0;
+     margin: .78125em 0;
      text-align: center;
    }
  }
 
  .new-store-form {
   * {
-   margin: 10px 5px 10px 5px;
+   margin: .625em .3125em .625em .3125em;
   }
   h2 {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 2.5em;
   }
   .image-upload {
     float: left;
-    width: 250px;
-    min-height: 300px;
+    width: 15.625em;
+    min-height: 18.75em;
     &:hover {
       box-shadow: 3px 3px 7px #cdc;
     }
@@ -83,13 +83,17 @@
     float: left;
     display: flex;
     flex-direction: column;
-    margin: 100px auto 40px 60px;
+    margin: 6.25em auto 2.5em 3.75em;
     .input-data {
-     float: right;
-     textarea {
-       position: absolute;
-       margin: 0;
-     }
+      input {
+        font-size: 1em;
+      }
+      float: right;
+      textarea {
+        font-size: 1em;
+        position: absolute;
+        margin: 0;
+      }
     }
     .create-button {
      align-self: flex-end;

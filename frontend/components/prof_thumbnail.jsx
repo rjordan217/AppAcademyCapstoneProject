@@ -32,7 +32,7 @@ var ProfThumbnail = React.createClass({
   render: function() {
     var profPicPOJO = {
       backgroundImage: "url('" + this.props.userProf.profile_pic_url + "')",
-      backgroundSize: '50px 50px'
+      backgroundSize: '3.125em 3.125em'
     };
     var forDropdown = (
       <ul className="profile-dropdown">
@@ -42,8 +42,8 @@ var ProfThumbnail = React.createClass({
       </ul>
     );
     var calcStyle = {
-      top: '48px',
-      left: '-55px'
+      top: '3em',
+      left: '-3.4375em'
     };
     return (
       <div className="prof-thumbnail droppable"
