@@ -20,10 +20,11 @@ var ItemsIndex = React.createClass({
       items = null;
     } else {
       items = ItemStore.all();
+      var scaling = (screen.width <= 480 ? "/w_562,c_scale" : "/w_300,c_scale");
       items.forEach(function(item) {
         var picUrl = item.product_pic_url;
-        if (!picUrl.match("/w_300,c_scale")) {
-          item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+        if (!picUrl.match(scaling)) {
+          item.product_pic_url = picUrl.replace("/image/upload", "/image/upload" + scaling);
         }
       });
     }
@@ -36,10 +37,11 @@ var ItemsIndex = React.createClass({
 
   updateItems: function() {
     var items = ItemStore.all();
+    var scaling = (screen.width <= 480 ? "/w_562,c_scale" : "/w_300,c_scale");
     items.forEach(function(item) {
       var picUrl = item.product_pic_url;
-      if (!picUrl.match("/w_300,c_scale")) {
-        item.product_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+      if (!picUrl.match(scaling)) {
+        item.product_pic_url = picUrl.replace("/image/upload", "/image/upload" + scaling);
       }
     });
     this.setState({items: items});

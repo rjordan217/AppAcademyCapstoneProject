@@ -22,18 +22,27 @@ var StoresIndex = React.createClass({
 
   _onStoresUpdate: function () {
     var vendedores = SellerStore.all();
+    var store_scaling,
+        item_scaling;
+    if(screen.width <= 480) {
+      store_scaling = "/w_562,c_scale";
+      item_scaling = "/w_188,c_scale";
+    } else {
+      store_scaling = "/w_300,c_scale";
+      item_scaling = "/w_100,c_scale";
+    }
     vendedores.forEach(function(store) {
       var picUrl = store.main_pic_url;
-      if (!picUrl.match("/w_300,c_scale")) {
-        store.main_pic_url = picUrl.replace("/image/upload", "/image/upload/w_300,c_scale");
+      if (!picUrl.match(store_scaling)) {
+        store.main_pic_url = picUrl.replace("/image/upload", "/image/upload" + store_scaling);
       }
 
       var itemPicsUrls = store.featured_pics;
       for(var idx = 0; idx < itemPicsUrls.length; idx++) {
-        if(!itemPicsUrls[idx].match("/w_100,c_scale")) {
+        if(!itemPicsUrls[idx].match(item_scaling)) {
           store.featured_pics[idx] = itemPicsUrls[idx].replace(
             "/image/upload",
-            "/image/upload/w_100,c_scale"
+            "/image/upload" + item_scaling
           );
         }
       }
