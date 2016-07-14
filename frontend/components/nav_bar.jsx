@@ -50,7 +50,11 @@ var NavBar = React.createClass({
     var authButtons;
     if (!this.state.currentUser.username) {
       authButtons = (
-        <div className="nav-auth">
+        <div className="nav-auth"
+          data-intro="Log in as a demo user, or register as a new user.
+          After login, you can build a shopping cart, favorite items/stores, and
+          even create your own stores/items!"
+          data-step="3">
           <div onClick={this._newSession}>Login</div>
           <div onClick={this._newUser}>Register</div>
         </div>

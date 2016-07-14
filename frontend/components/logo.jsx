@@ -10,7 +10,11 @@ var Logo = React.createClass({
   render: function() {
     return (
       <div className="nav-logo">
-        <img src='/assets/petsy_logo.png' onClick={this._goHome} />
+        <img src='/assets/petsy_logo.png'
+          onClick={this._goHome}
+          data-intro="Welcome to Petsy! To navigate back to the stores page at any
+          time, click this logo."
+          data-step="1"/>
       </div>
     );
   }

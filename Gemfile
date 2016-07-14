@@ -28,6 +28,7 @@ gem 'figaro'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'faker'
+gem "introjs-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

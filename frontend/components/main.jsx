@@ -6,6 +6,11 @@ var Main = React.createClass({
   _directToStores: function(e) {
     e.preventDefault();
     HashHistory.push('/stores');
+    setTimeout(
+      function() {
+        introJs().setOption('showProgress', true).start();
+      },
+      3000);
   },
 
   render: function() {

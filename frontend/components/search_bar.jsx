@@ -38,7 +38,9 @@ var SearchBar = React.createClass({
 
   render: function() {
     return (
-      <div className="search-bar">
+      <div className="search-bar"
+        data-intro="Search items and stores for keywords in their names or descriptions!"
+        data-step="2">
         <input type="search"
           value={this.state.searchParams}
           onChange={this._updateSearchParams}

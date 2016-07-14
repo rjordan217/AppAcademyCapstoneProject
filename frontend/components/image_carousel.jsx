@@ -34,6 +34,7 @@ var ImageCarousel = React.createClass({
       arrows: true,
       autoplay: true,
       autoplaySpeed: 5000,
+      lazyLoad: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -45,17 +46,23 @@ var ImageCarousel = React.createClass({
           <div>
             <div className="carousel-pic">{CAROUSEL_PICS[0]}</div>
             {CAROUSEL_HEADERS[0]}
+            <hr />
             {CAROUSEL_TEXTS[0]}
+            <hr />
           </div>
           <div>
             <div className="carousel-pic">{CAROUSEL_PICS[1]}</div>
             {CAROUSEL_HEADERS[1]}
+            <hr />
             {CAROUSEL_TEXTS[1]}
+            <hr />
           </div>
           <div>
             <div className="carousel-pic">{CAROUSEL_PICS[2]}</div>
             {CAROUSEL_HEADERS[2]}
+            <hr />
             {CAROUSEL_TEXTS[2]}
+            <hr />
           </div>
         </Slider>
       </div>
