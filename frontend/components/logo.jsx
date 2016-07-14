@@ -14,7 +14,8 @@ var Logo = React.createClass({
           onClick={this._goHome}
           data-intro="Welcome to Petsy! To navigate back to the stores page at any
           time, click this logo."
-          data-step="1"/>
+          data-step="1"
+          data-position="right"/>
       </div>
     );
   }

@@ -125,10 +125,11 @@ var StoresIndex = React.createClass({
     return (
       <div className="index-container">
         { !this.props.fetchedBySearch ? <ImageCarousel /> : null}
-        <div data-intro='Hover over stores or items to see the buttons to "Favorite"
-        or "Add to Cart". Click on stores or items to get details!'
-        data-step="4"></div>
-        <div className="stores-index">
+        <div className="stores-index"
+          data-intro='Hover over stores or items to see the buttons to "Favorite"
+          or "Add to Cart". Click on stores or items to get details!'
+          data-step="4"
+          data-position="top">
           {content}
         </div>
       </div>

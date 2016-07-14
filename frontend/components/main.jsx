@@ -8,7 +8,9 @@ var Main = React.createClass({
     HashHistory.push('/stores');
     setTimeout(
       function() {
-        introJs().setOption('showProgress', true).start();
+        introJs().setOption('tooltipPosition', 'auto')
+                 .setOption('showProgress', true)
+                 .start();
       },
       3000);
   },

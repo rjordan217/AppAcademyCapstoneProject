@@ -54,7 +54,8 @@ var NavBar = React.createClass({
           data-intro="Log in as a demo user, or register as a new user.
           After login, you can build a shopping cart, favorite items/stores, and
           even create your own stores/items!"
-          data-step="3">
+          data-step="3"
+          data-position="left">
           <div onClick={this._newSession}>Login</div>
           <div onClick={this._newUser}>Register</div>
         </div>
