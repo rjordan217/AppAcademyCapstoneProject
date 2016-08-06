@@ -1,71 +1,78 @@
 var React = require('react'),
-    Slider = require('react-slick');
-
-var CAROUSEL_PICS = [];
-for(var i = 0; i < 3; i++) {
-  CAROUSEL_PICS.push(<img src={"/assets/index_carousel/img" + i + ".jpg"} />);
-}
-
-var CAROUSEL_HEADERS = [
-  <h2>The Best for Your Best Little Buddies</h2>,
-  <h2>Help Your Pet Stay Active!</h2>,
-  <h2>Healthy Mind, Healthy Life</h2>
-];
-var CAROUSEL_TEXTS = [
-  <p>Here at Petsy, we love animals and think they deserve the best treatment
-possible! Whether your pets are energetic and playful or a bit more on the
-reserved side, Petsy has everything you need to keep your animals happy, healthy,
-and well-loved!</p>,
-  <p>Many of our sellers here on Petsy understand the importance of physical
-activity to an animals health, and have spent years developing fun and innovative
-ways for pets to get exercise! Browse our many options to find products to build
-obstacle courses and much more!</p>,
-  <p>We all loved to play with toys growing up, and pets are no exception! Toys
-are crucial to the healthy mental development of your pet, so choose from our
-many engaging options to make sure your pets have the time of their lives while
-developing their brains!</p>
-];
+    CarouselElement = require('./carousel_element');
 
 var ImageCarousel = React.createClass({
 
-  render: function () {
-    var settings = {
-      dots: true,
-      arrows: true,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      lazyLoad: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
+  getInitialState: function() {
+    return {
+      counter: 0,
+      carouselInt: null,
+      carouselEls: null
     };
-    return (
-      <div className="image-carousel">
-        <Slider {...settings}>
-          <div>
-            <div className="carousel-pic">{CAROUSEL_PICS[0]}</div>
-            {CAROUSEL_HEADERS[0]}
-            <hr />
-            {CAROUSEL_TEXTS[0]}
-            <hr />
-          </div>
-          <div>
-            <div className="carousel-pic">{CAROUSEL_PICS[1]}</div>
-            {CAROUSEL_HEADERS[1]}
-            <hr />
-            {CAROUSEL_TEXTS[1]}
-            <hr />
-          </div>
-          <div>
-            <div className="carousel-pic">{CAROUSEL_PICS[2]}</div>
-            {CAROUSEL_HEADERS[2]}
-            <hr />
-            {CAROUSEL_TEXTS[2]}
-            <hr />
-          </div>
-        </Slider>
+  },
+
+  componentDidMount: function() {
+    var carouselEls = document.getElementsByClassName('carousel-element');
+    this.setState({carouselEls: carouselEls});
+    setTimeout(this.setCarouselHeight, 50);
+  },
+
+  setCarouselHeight: function() {
+    if (this.state.carouselEls) {
+      var border = document.getElementById('carousel-border');
+      var currentEl = this.state.carouselEls[this.state.counter];
+      border.style.height = currentEl.offsetHeight.toString() + "px";
+      clearInterval(this.state.carouselInt);
+      this.setState({carouselInt: setInterval(this.incrementCounterAndShift, 7000)});
+    }
+  },
+
+  shiftCarouselElements: function() {
+    if(this.state.carouselEls) {
+      this.setCarouselHeight();
+      var carouselEls = this.state.carouselEls;
+      var counter = this.state.counter;
+
+      carouselEls[counter].style.left = "0";
+      carouselEls[counter].style.zIndex = "1";
+
+      carouselEls[(counter + 1) % 3 ].style.left = "100%";
+      carouselEls[(counter + 1) % 3 ].style.zIndex = "-1";
+
+      carouselEls[(counter + 2) % 3].style.left = "-100%";
+      carouselEls[(counter + 2) % 3].style.zIndex = "0";
+    }
+  },
+
+  incrementCounterAndShift: function() {
+    this.setState({counter: (this.state.counter + 1) % 3});
+    setTimeout(this.shiftCarouselElements, 50);
+  },
+
+  decrementCounterAndShift: function() {
+    this.setState({counter: (this.state.counter + 2) % 3});
+    setTimeout(this.shiftCarouselElements, 50);
+  },
+
+  render: function () {
+    var carouselEls = [
+      <CarouselElement elNumber={0} key={0} />,
+      <CarouselElement elNumber={1} key={1} />,
+      <CarouselElement elNumber={2} key={2} />
+    ];
+
+    var border = (
+      <div id="carousel-border">
+        {carouselEls}
       </div>
+    );
+
+    return (
+      <section className="carousel-container">
+        <button className="left-car" onClick={this.decrementCounterAndShift}>◀</button>
+        <button className="right-car" onClick={this.incrementCounterAndShift}>▶</button>
+        {border}
+      </section>
     );
   }
 });

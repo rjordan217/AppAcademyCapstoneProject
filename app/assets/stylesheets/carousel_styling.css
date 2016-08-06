@@ -1,0 +1,72 @@
+.carousel-container {
+  width: 100%;
+  padding: 1em;
+  position: relative;
+}
+
+.carousel-container button {
+  padding: 5px;
+  position: absolute;
+  width: 2em;
+  z-index: 2;
+}
+
+.left-car {
+  left: 2%;
+  top: 45vh;
+}
+
+.right-car {
+  position: absolute;
+  right: 2%;
+  top: 45vh;
+}
+
+#carousel-border {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  background-color: white;
+}
+
+.carousel-element {
+  margin: auto;
+  width: 98%;
+  transition: left 1s;
+  background-color: white;
+}
+
+.carousel-element:nth-child(1) {
+  position: absolute;
+  left: -100%;
+}
+
+.carousel-element:nth-child(2) {
+  position: absolute;
+  left: 0;
+}
+
+.carousel-element:nth-child(3) {
+  position: absolute;
+  left: 100%;
+}
+
+.carousel-element div {
+  margin: auto;
+  width: 90%;
+}
+
+.carousel-element img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-element h2 {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.carousel-element p {
+  text-indent: 2em;
+}

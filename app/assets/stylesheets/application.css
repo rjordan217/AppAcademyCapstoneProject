@@ -159,47 +159,6 @@ body * {
    width: 90%;
  }
 
- .image-carousel {
-   width: 100%;
-   margin-bottom: 3.75em;
- }
-
- .image-carousel * {
-   background-color: #fefefe;
- }
-
- .image-carousel img {
-   max-width: 80vw;
-   height: 31.25em;
-   width: auto;
-   margin: auto;
- }
-
- .image-carousel h2 {
-   padding: .5em .34em 0 .34em;
-   text-align: center;
- }
-
- .image-carousel p {
-   padding: .67em;
-   line-height: 150%;
-   text-indent: 3em;
-   font-size: 1.25em;
-   margin-bottom: 0;
- }
-
- .carousel-pic {
-   width: 100%;
- }
-
-.slick-dots {
- bottom: -1.25em;
-}
-
-.slick-prev:before, .slick-next:before{
-    color: #2FD52F;
-}
-
 /*  NavBar styling
  *
  *
